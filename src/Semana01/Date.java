@@ -15,7 +15,7 @@ class Date {
     public int getDia() {
         return dia;
     }
-    public int getMes() {
+    public int Mes() {
         return mes;
     }
     public int getAno() {
