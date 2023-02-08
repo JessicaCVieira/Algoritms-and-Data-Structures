@@ -15,14 +15,13 @@ class Date {
     public int getDia() {
         return dia;
     }
-    public int Mes() {
+    public int getMes() {
         return mes;
     }
     public int getAno() {
         return ano;
     }
 
-    ljkashdpdgjhasldfjhasldfjhasldkjfhasldjfhaslkjdfh
 
     @Override
     public String toString() {
