@@ -2,7 +2,7 @@ package Semana01;
 
 import java.util.Scanner;
 
-//todo: apagar os statics que não estejam na main
+//TODO: apagar os statics que não estejam na main
 
 public class Date {
 
