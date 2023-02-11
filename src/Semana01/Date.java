@@ -30,7 +30,7 @@ public class Date {
 		return true; 
 	}
 	
-	private static int daysInMonth(int month, int year) {
+	private int daysInMonth(int month, int year) {
 		int daysInMonth= 0; 
 		if (month == 2){
 			if (isBissexto(year)){
@@ -59,7 +59,7 @@ public class Date {
 		System.out.println("" + daysInMonth(month,year));
 	}*/
 
-	private static boolean isBissexto (int year){
+	private boolean isBissexto (int year){
 		if(div(year, 400)){
 			return true; 
 		}else if(div(year,4) && !div(year,100)){
@@ -78,7 +78,7 @@ public class Date {
 		System.out.println("" + isBissexto(year));
 	}*/
 
-	private static boolean div (int year, int n){
+	private boolean div (int year, int n){
 		if((year % n) == 0){
 			return true; 
 		}else{
@@ -87,15 +87,15 @@ public class Date {
 	}
 
 	//Getters
-	public int month() {
+	public int getMonth() {
 		return month; 
 	}
 	
-	public int day() {
+	public int getDay() {
 		return day; 
 	}
 	
-	public int year() {
+	public int getYear() {
 		return year;
 	}
 	
@@ -107,7 +107,7 @@ public class Date {
 	
 	//Ex:1
 	//usando o scanner 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		Scanner sc = new Scanner (System.in); 
 		System.out.print("introduza o mês:");
 		int month = sc.nextInt(); 
@@ -117,7 +117,7 @@ public class Date {
 		int year = sc.nextInt(); 
 		Date date = new Date(month, day, year);
 		System.out.println("Data: " + date.toString());
-	}
+	}*/
 
 	//Sem usar o scanner
 	/*public static void main(String[] args) {
@@ -135,6 +135,57 @@ public class Date {
 	}*/
 	
 	//Ex: 2
-	
+	//Metodos
+	private boolean before(Date d){
+		Date date = new Date (month, day, year);
+		if(d.getYear() > date.getYear()){
+			return false; 
+		}else if(d.getMonth() > date.getMonth()){
+			return false;
+		}else if(d.getDay() > date.getDay()){
+			return false;
+		}else{
+			return true;
+		}
+	}
 
+	private int daysBetween(Date d){
+		Date date = new Date (month, day, year);
+		int daysBetween = 0; 
+		if(d == date){
+			daysBetween = 0; 
+		}
+
+		return daysBetween;
+	}
+
+	//main
+	public static void main(String[] args) {
+		Scanner sc = new Scanner (System.in); 
+		//date
+		System.out.print("introduza o mês:");
+		int month = sc.nextInt(); 
+		System.out.print("introduza o dia:");
+		int day = sc.nextInt(); 
+		System.out.print("introduza o ano:");
+		int year = sc.nextInt(); 
+		Date date = new Date(month, day, year);
+		System.out.println("Date: " + date.toString());
+
+		//d
+		System.out.print("introduza o mês:");
+		int monthd = sc.nextInt(); 
+		System.out.print("introduza o dia:");
+		int dayd = sc.nextInt(); 
+		System.out.print("introduza o ano:");
+		int yeard = sc.nextInt(); 
+		Date d = new Date(monthd, dayd, yeard);
+		System.out.println("d: " + d.toString());
+
+		sc.close();
+
+		//before
+		System.out.print("Before:" + date.before(d));
+		//
+	}
 }
