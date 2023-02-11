@@ -19,6 +19,7 @@ public class Date {
 		this.year = year; 
 	} 
 	
+	//funções auxiliares ao construtor
 	private boolean validDate(int month, int day, int year) {
 		if(year < 0)
 			return false; 
@@ -29,13 +30,34 @@ public class Date {
 		return true; 
 	}
 	
-	private static boolean div (int year, int n){
-		if((year % n) == 0){
-			return true; 
+	private static int daysInMonth(int month, int year) {
+		int daysInMonth= 0; 
+		if (month == 2){
+			if (isBissexto(year)){
+				daysInMonth = 29; 
+			}else{
+				daysInMonth = 28;
+			}
+
 		}else{
-			return false; 
+			if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12){
+				daysInMonth = 31; 
+			}else{
+				daysInMonth = 30; 
+			}
 		}
-	}
+		return daysInMonth;
+	} 
+
+	//Para testar daysInMonth
+	/*public static void main(String[] args) {
+		Scanner sc = new Scanner (System.in); 
+		System.out.print("introduza o ano:");
+		int year = sc.nextInt(); 
+		System.out.print("introduza o mês:");
+		int month = sc.nextInt(); 
+		System.out.println("" + daysInMonth(month,year));
+	}*/
 
 	private static boolean isBissexto (int year){
 		if(div(year, 400)){
@@ -56,35 +78,15 @@ public class Date {
 		System.out.println("" + isBissexto(year));
 	}*/
 
-
-	private static int daysInMonth(int month, int year) {
-		int daysInMonth= 0; 
-		if (month == 2){
-			if (isBissexto(year)){
-				daysInMonth = 29; 
-			}else{
-				daysInMonth = 28;
-			}
-
+	private static boolean div (int year, int n){
+		if((year % n) == 0){
+			return true; 
 		}else{
-			if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12){
-				daysInMonth = 31; 
-			}else{
-				daysInMonth = 30; 
-			}
+			return false; 
 		}
-		return daysInMonth;
-	} 
+	}
 
-	/*public static void main(String[] args) {
-		Scanner sc = new Scanner (System.in); 
-		System.out.print("introduza o ano:");
-		int year = sc.nextInt(); 
-		System.out.print("introduza o mês:");
-		int month = sc.nextInt(); 
-		System.out.println("" + daysInMonth(month,year));
-	}*/
-
+	//Getters
 	public int month() {
 		return month; 
 	}
@@ -97,14 +99,27 @@ public class Date {
 		return year;
 	}
 	
-	//por defeito esta classe já existe
+	//usa-se o override porque por defeito esta classe já existe
 	@Override
 	public String toString() {
 		return month + "/" + day + "/" + year; 
 	}
 	
-	
-	//TODO - usar scanners no main 
+	//Ex:1
+	//usando o scanner 
+	public static void main(String[] args) {
+		Scanner sc = new Scanner (System.in); 
+		System.out.print("introduza o mês:");
+		int month = sc.nextInt(); 
+		System.out.print("introduza o dia:");
+		int day = sc.nextInt(); 
+		System.out.print("introduza o ano:");
+		int year = sc.nextInt(); 
+		Date date = new Date(month, day, year);
+		System.out.println("Data: " + date.toString());
+	}
+
+	//Sem usar o scanner
 	/*public static void main(String[] args) {
 		if(args.length != 3) {
 			System.err.println("Missing data... exiting now!"); 
@@ -116,10 +131,10 @@ public class Date {
 		
 		Date date = new Date (month, day, year); 
 		System.out.println(date.toString());
-		//ou sÃ³ : System.out.println(date); porque por defeito o toString jÃ¡ existe 
-
+		//ou : System.out.println(date); porque por defeito o metodo toString já existe 
 	}*/
 	
-
+	//Ex: 2
+	
 
 }
