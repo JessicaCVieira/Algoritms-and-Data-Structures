@@ -2,8 +2,6 @@ package Semana01;
 
 import java.util.Scanner;
 
-//TODO: apagar os statics que não estejam na main
-
 public class Date {
 
 	private int day; 
@@ -149,11 +147,54 @@ public class Date {
 		}
 	}
 
+	private int daystoEndYear(){
+		//TODO
+		Date date = new Date(month, day, year);
+		Date d = new Date (12,31,year);
+		int days = 0; 
+		if(date.getMonth() < 12){
+			for(int i = date.getMonth() + 1; i < d.getMonth(); i++){
+				days += daysInMonth(i, year);
+			}
+
+		}
+		return days; 
+	}
+
+	private int dayssinceBeginYear(){
+		//TODO
+		Date date = new Date(month, day, year);
+		Date d = new Date (1,1,year);
+		int dayssinceBeginYear = 0; 
+		if( ){
+			
+		}
+		return dayssinceBeginYear; 
+	}
+
+	
 	private int daysBetween(Date d){
 		Date date = new Date (month, day, year);
 		int daysBetween = 0; 
 		if(d == date){
-			daysBetween = 0; 
+			return 0;
+		}else if(d.getYear() == date.getYear()){
+			if(d.getMonth() == date.getMonth()){
+				if(d.getDay() > date.getDay()){
+                    daysBetween = d.getDay() - date.getDay();
+                }else{
+                    daysBetween = date.getDay() - d.getDay();
+                }
+			}else{
+				if(d.getDay() == date.getDay()){
+					//daysBetween = //TODO finish
+				}else if(d.getDay() > date.getDay()){
+                    daysBetween = d.getDay() - date.getDay();
+                }else{
+                    daysBetween = date.getDay() - d.getDay();
+                }
+			}
+
 		}
 
 		return daysBetween;
