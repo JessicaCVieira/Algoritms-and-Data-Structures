@@ -1,4 +1,9 @@
 package Semana01;
+
+import java.util.Scanner;
+
+//todo: apagar os statics que não estejam na main
+
 public class Date {
 
 	private int day; 
@@ -24,10 +29,62 @@ public class Date {
 		return true; 
 	}
 	
-	private int daysInMonth(int month, int year) {
-		//TODO 
+	private static boolean div (int year, int n){
+		if((year % n) == 0){
+			return true; 
+		}else{
+			return false; 
+		}
 	}
-	
+
+	private static boolean isBissexto (int year){
+		if(div(year, 400)){
+			return true; 
+		}else if(div(year,4) && !div(year,100)){
+			return true; 
+		}else{
+			return false; 
+		}
+	}
+
+	//para testar isBissexto
+	//tive que por a função isBissexto e a div como static
+	/*public static void main(String[] args) {
+		Scanner sc = new Scanner (System.in); 
+		System.out.print("introduza o ano:");
+		int year = sc.nextInt(); 
+		System.out.println("" + isBissexto(year));
+	}*/
+
+
+	private static int daysInMonth(int month, int year) {
+		int daysInMonth= 0; 
+		if (month == 2){
+			if (isBissexto(year)){
+				daysInMonth = 29; 
+			}else{
+				daysInMonth = 28;
+			}
+
+		}else{
+			if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12){
+				daysInMonth = 31; 
+			}else{
+				daysInMonth = 30; 
+			}
+		}
+		return daysInMonth;
+	} 
+
+	/*public static void main(String[] args) {
+		Scanner sc = new Scanner (System.in); 
+		System.out.print("introduza o ano:");
+		int year = sc.nextInt(); 
+		System.out.print("introduza o mês:");
+		int month = sc.nextInt(); 
+		System.out.println("" + daysInMonth(month,year));
+	}*/
+
 	public int month() {
 		return month; 
 	}
@@ -40,13 +97,15 @@ public class Date {
 		return year;
 	}
 	
-	//por defeito esta classe jÃ¡ existe 
+	//por defeito esta classe já existe
 	@Override
 	public String toString() {
 		return month + "/" + day + "/" + year; 
 	}
 	
-	public static void main(String[] args) {
+	
+	//TODO - usar scanners no main 
+	/*public static void main(String[] args) {
 		if(args.length != 3) {
 			System.err.println("Missing data... exiting now!"); 
 			System.exit(-1); //se for System.exit(0) significa que nÃ£o houve erro nenhum 
@@ -59,6 +118,8 @@ public class Date {
 		System.out.println(date.toString());
 		//ou sÃ³ : System.out.println(date); porque por defeito o toString jÃ¡ existe 
 
-	}
+	}*/
+	
+
 
 }
