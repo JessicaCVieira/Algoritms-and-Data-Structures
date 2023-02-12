@@ -173,7 +173,7 @@ public class Date {
 				daysBetweenMonth -= countDays(date,d);
 			}
 		}else{
-			for(int i = date.getMonth(); i < d.getMonth(); i++){
+			for(int i = d.getMonth(); i > date.getMonth(); i--){
 				daysBetweenMonth += daysInMonth(i, year);
 			}
 			if(date.getDay() > d.getDay()){
