@@ -47,16 +47,6 @@ public class Date {
 		return daysInMonth;
 	} 
 
-	//Para testar daysInMonth
-	/*public static void main(String[] args) {
-		Scanner sc = new Scanner (System.in); 
-		System.out.print("introduza o ano:");
-		int year = sc.nextInt(); 
-		System.out.print("introduza o mês:");
-		int month = sc.nextInt(); 
-		System.out.println("" + daysInMonth(month,year));
-	}*/
-
 	private boolean isBissexto (int year){
 		if(div(year, 400)){
 			return true; 
@@ -66,15 +56,6 @@ public class Date {
 			return false; 
 		}
 	}
-
-	//para testar isBissexto
-	//tive que por a função isBissexto e a div como static
-	/*public static void main(String[] args) {
-		Scanner sc = new Scanner (System.in); 
-		System.out.print("introduza o ano:");
-		int year = sc.nextInt(); 
-		System.out.println("" + isBissexto(year));
-	}*/
 
 	private boolean div (int year, int n){
 		if((year % n) == 0){
@@ -102,36 +83,7 @@ public class Date {
 	public String toString() {
 		return month + "/" + day + "/" + year; 
 	}
-	
-	//Ex:1
-	//usando o scanner 
-	/*public static void main(String[] args) {
-		Scanner sc = new Scanner (System.in); 
-		System.out.print("introduza o mês:");
-		int month = sc.nextInt(); 
-		System.out.print("introduza o dia:");
-		int day = sc.nextInt(); 
-		System.out.print("introduza o ano:");
-		int year = sc.nextInt(); 
-		Date date = new Date(month, day, year);
-		System.out.println("Data: " + date.toString());
-	}*/
 
-	//Sem usar o scanner
-	/*public static void main(String[] args) {
-		if(args.length != 3) {
-			System.err.println("Missing data... exiting now!"); 
-			System.exit(-1); //se for System.exit(0) significa que nÃ£o houve erro nenhum 
-		}
-		int month = Integer.parseInt(args[0]); 
-		int day = Integer.parseInt(args[1]);
-		int year = Integer.parseInt(args[2]);
-		
-		Date date = new Date (month, day, year); 
-		System.out.println(date.toString());
-		//ou : System.out.println(date); porque por defeito o metodo toString já existe 
-	}*/
-	
 	//Ex: 2
 	//Metodos
 	private boolean before(Date d){
@@ -193,11 +145,10 @@ public class Date {
 			}
 		}else{
 			date.countDaysDifYear(d); 
+		
 		}
 		return daysBetween;
 	}
-
-	
 
 	//Aux
 	private int countDays (Date d){
@@ -228,7 +179,6 @@ public class Date {
 		return daysBetweenMonth; 
 	}
 
-	//TODO dif year é fdd
 	private int countDaysDifYear(Date d){
 		Date date = new Date (month, day, year);
 		int difYear = 0; 
