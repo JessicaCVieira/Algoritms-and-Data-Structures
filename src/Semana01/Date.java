@@ -153,26 +153,45 @@ public class Date {
 		Date d = new Date (12,31,year);
 		int days = 0; 
 		if(date.getMonth() < 12){
-			for(int i = date.getMonth() + 1; i < d.getMonth(); i++){
+			for(int i = date.getMonth(); i < d.getMonth(); i++){
 				days += daysInMonth(i, year);
 			}
-
+			days += d.getDay() - date.getDay();
+		}else{
+			days += d.getDay() - date.getDay(); 
 		}
 		return days; 
+	}
+
+	//aux
+	private int daysInYear(){
+		int daysInYear = 0; 
+		Date date = new Date (month, day, year);
+		if(isBissexto(date.getYear())){
+			daysInYear = 366; 
+		}else{
+			daysInYear = 365;
+		}
+		return daysInYear;
 	}
 
 	private int dayssinceBeginYear(){
 		//TODO
 		Date date = new Date(month, day, year);
 		Date d = new Date (1,1,year);
-		int dayssinceBeginYear = 0; 
-		if( ){
-			
+		int dayssinceBeginYear = 0;  
+		if(date.getMonth() > 1){
+			for(int i = date.getMonth(); i > d.getMonth(); i--){
+				dayssinceBeginYear += daysInMonth(i, year);
+			}
+			dayssinceBeginYear += date.getDay() - d.getDay();
+		}else{
+			dayssinceBeginYear += date.getDay() - d.getDay(); 
 		}
 		return dayssinceBeginYear; 
 	}
 
-	
+	//TODO meter bonito
 	private int daysBetween(Date d){
 		Date date = new Date (month, day, year);
 		int daysBetween = 0; 
@@ -186,8 +205,22 @@ public class Date {
                     daysBetween = date.getDay() - d.getDay();
                 }
 			}else{
-				if(d.getDay() == date.getDay()){
-					//daysBetween = //TODO finish
+				if(date.getMonth() > d.getMonth()){
+					for(int i = date.getMonth(); i > d.getMonth(); i--){
+						daysBetween += daysInMonth(i, year);
+					}
+					if(date.getDay() > d.getDay()){
+						daysBetween += date.getDay() - d.getDay();
+					}else{
+						daysBetween += d.getDay() - date.getDay();
+					}
+				}else{
+					for(int i = date.getMonth(); i < d.getMonth(); i++){
+						daysBetween += daysInMonth(i, year);
+					}
+					daysBetween += d.getDay() - date.getDay();
+				}
+			}
 				}else if(d.getDay() > date.getDay()){
                     daysBetween = d.getDay() - date.getDay();
                 }else{
@@ -199,6 +232,7 @@ public class Date {
 
 		return daysBetween;
 	}
+
 
 	//main
 	public static void main(String[] args) {
@@ -221,12 +255,19 @@ public class Date {
 		System.out.print("introduza o ano:");
 		int yeard = sc.nextInt(); 
 		Date d = new Date(monthd, dayd, yeard);
-		System.out.println("d: " + d.toString());
+		System.out.println("d: " + d.toString());*/
 
 		sc.close();
 
 		//before
-		System.out.print("Before:" + date.before(d));
-		//
+		System.out.println("Before:" + date.before(d));
+		//daystoEndYear
+		System.out.println("Days to the end of the year: " + date.daystoEndYear());
+		//dayssinceBeginYear
+		System.out.println("Days since the beginning of the year: " + date.dayssinceBeginYear());
+		//daysBetween
+		System.out.print("The days between the date: " + date.toString());
+		System.out.print(" and the date: " + d.toString());
+		System.out.print(" are "+ date.daysBetween(d));
 	}
 }
