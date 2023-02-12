@@ -148,7 +148,7 @@ public class Date {
 	}
 
 	private int daystoEndYear(){
-		//TODO
+	
 		Date date = new Date(month, day, year);
 		Date d = new Date (12,31,year);
 		int days = 0; 
@@ -163,20 +163,8 @@ public class Date {
 		return days; 
 	}
 
-	//aux
-	private int daysInYear(){
-		int daysInYear = 0; 
-		Date date = new Date (month, day, year);
-		if(isBissexto(date.getYear())){
-			daysInYear = 366; 
-		}else{
-			daysInYear = 365;
-		}
-		return daysInYear;
-	}
-
 	private int dayssinceBeginYear(){
-		//TODO
+		
 		Date date = new Date(month, day, year);
 		Date d = new Date (1,1,year);
 		int dayssinceBeginYear = 0;  
@@ -191,48 +179,100 @@ public class Date {
 		return dayssinceBeginYear; 
 	}
 
-	//TODO meter bonito
 	private int daysBetween(Date d){
+
 		Date date = new Date (month, day, year);
 		int daysBetween = 0; 
-		if(d == date){
-			return 0;
+		if(d.getDay() == date.getDay() && d.getMonth() == date.getMonth() && d.getYear() == date.getYear()){
+			daysBetween = 0;
 		}else if(d.getYear() == date.getYear()){
 			if(d.getMonth() == date.getMonth()){
-				if(d.getDay() > date.getDay()){
-                    daysBetween = d.getDay() - date.getDay();
-                }else{
-                    daysBetween = date.getDay() - d.getDay();
-                }
+				date.countDays(d);
 			}else{
-				if(date.getMonth() > d.getMonth()){
-					for(int i = date.getMonth(); i > d.getMonth(); i--){
-						daysBetween += daysInMonth(i, year);
-					}
-					if(date.getDay() > d.getDay()){
-						daysBetween += date.getDay() - d.getDay();
-					}else{
-						daysBetween += d.getDay() - date.getDay();
-					}
-				}else{
-					for(int i = date.getMonth(); i < d.getMonth(); i++){
-						daysBetween += daysInMonth(i, year);
-					}
-					daysBetween += d.getDay() - date.getDay();
-				}
+				date.countDaysDifMonth(d); 
 			}
-				}else if(d.getDay() > date.getDay()){
-                    daysBetween = d.getDay() - date.getDay();
-                }else{
-                    daysBetween = date.getDay() - d.getDay();
-                }
-			}
-
+		}else{
+			date.countDaysDifYear(d); 
 		}
-
 		return daysBetween;
 	}
 
+	
+
+	//Aux
+	private int countDays (Date d){
+		Date date = new Date (month, day, year);
+		int countDay = 0; 
+		if(d.getDay() > date.getDay()){
+			countDay = d.getDay() - date.getDay();
+		}else{
+			countDay = date.getDay() - d.getDay();
+		}
+		return countDay; 
+	}
+
+	private int countDaysDifMonth (Date d){
+		Date date = new Date (month, day, year);
+		int daysBetweenMonth = 0; 
+		if(date.getMonth() > d.getMonth()){
+			for(int i = date.getMonth(); i > d.getMonth(); i--){
+				daysBetweenMonth += daysInMonth(i, year);
+			}
+			daysBetweenMonth += date.countDays(d); 
+		}else{
+			for(int i = date.getMonth(); i < d.getMonth(); i++){
+				daysBetweenMonth += daysInMonth(i, year);
+			}
+			daysBetweenMonth += date.countDays(d);
+		}
+		return daysBetweenMonth; 
+	}
+
+	//TODO dif year é fdd
+	private int countDaysDifYear(Date d){
+		Date date = new Date (month, day, year);
+		int difYear = 0; 
+		int daysBetweenYear = 0; 
+		Date d1 = new Date(d.getMonth(),d.getDay(), date.getYear());
+		if(date.getYear() > d.getYear()){
+            difYear = date.getYear() - d.getYear();
+			if(date.getMonth() > d.getMonth()){
+				for(int i = d.getYear(); i < difYear; i++){
+					daysBetweenYear += daysInYear(i);
+				} 
+				daysBetweenYear += date.countDaysDifMonth(d1);
+			}else{
+				for(int i = d.getYear(); i < difYear - 1; i++){
+					daysBetweenYear += daysInYear(i);
+				} 
+				daysBetweenYear += date.countDaysDifMonth(d1);
+			}
+        }else{
+            difYear = d.getYear() - date.getYear();
+			if(date.getMonth() > d.getMonth()){
+				for(int i = d.getYear(); i < difYear; i++){
+					daysBetweenYear += daysInYear(i);
+				} 
+				daysBetweenYear += date.countDaysDifMonth(d1);
+			}else{
+				for(int i = d.getYear(); i < difYear - 1; i++){
+					daysBetweenYear += daysInYear(i);
+				} 
+				daysBetweenYear += date.countDaysDifMonth(d1);
+			} 
+        }
+		return daysBetweenYear; 
+	}
+
+	private int daysInYear(int year){
+		int daysInYear = 0; 
+		if(isBissexto(year)){
+			daysInYear = 366; 
+		}else{
+			daysInYear = 365;
+		}
+		return daysInYear;
+	}
 
 	//main
 	public static void main(String[] args) {
@@ -255,7 +295,7 @@ public class Date {
 		System.out.print("introduza o ano:");
 		int yeard = sc.nextInt(); 
 		Date d = new Date(monthd, dayd, yeard);
-		System.out.println("d: " + d.toString());*/
+		System.out.println("d: " + d.toString());
 
 		sc.close();
 
