@@ -139,20 +139,19 @@ public class Date {
 			daysBetween = 0;
 		}else if(d.getYear() == date.getYear()){
 			if(d.getMonth() == date.getMonth()){
-				date.countDays(d);
+				countDays(date,d);
 			}else{
-				date.countDaysDifMonth(d); 
+				countDaysDifMonth(date, d); 
 			}
 		}else{
-			date.countDaysDifYear(d); 
+			countDaysDifYear(date, d); 
 		
 		}
 		return daysBetween;
 	}
 
 	//Aux
-	private int countDays (Date d){
-		Date date = new Date (month, day, year);
+	private int countDays (Date date, Date d){
 		int countDay = 0; 
 		if(d.getDay() > date.getDay()){
 			countDay = d.getDay() - date.getDay();
@@ -162,25 +161,32 @@ public class Date {
 		return countDay; 
 	}
 
-	private int countDaysDifMonth (Date d){
-		Date date = new Date (month, day, year);
+	private int countDaysDifMonth (Date date, Date d){
 		int daysBetweenMonth = 0; 
 		if(date.getMonth() > d.getMonth()){
 			for(int i = date.getMonth(); i > d.getMonth(); i--){
 				daysBetweenMonth += daysInMonth(i, year);
 			}
-			daysBetweenMonth += date.countDays(d); 
+			if(date.getDay() > d.getDay()){
+				daysBetweenMonth += countDays(date,d);
+			}else{
+				daysBetweenMonth -= countDays(date,d);
+			}
 		}else{
 			for(int i = date.getMonth(); i < d.getMonth(); i++){
 				daysBetweenMonth += daysInMonth(i, year);
 			}
-			daysBetweenMonth += date.countDays(d);
+			if(date.getDay() > d.getDay()){
+				daysBetweenMonth += countDays(date,d);
+			}else{
+				daysBetweenMonth -= countDays(date,d);
+			}
 		}
 		return daysBetweenMonth; 
 	}
 
-	private int countDaysDifYear(Date d){
-		Date date = new Date (month, day, year);
+	private int countDaysDifYear(Date date, Date d){
+		
 		int difYear = 0; 
 		int daysBetweenYear = 0; 
 		Date d1 = new Date(d.getMonth(),d.getDay(), date.getYear());
@@ -190,12 +196,12 @@ public class Date {
 				for(int i = d.getYear(); i < difYear; i++){
 					daysBetweenYear += daysInYear(i);
 				} 
-				daysBetweenYear += date.countDaysDifMonth(d1);
+				daysBetweenYear += countDaysDifMonth(date, d1);
 			}else{
 				for(int i = d.getYear(); i < difYear - 1; i++){
 					daysBetweenYear += daysInYear(i);
 				} 
-				daysBetweenYear += date.countDaysDifMonth(d1);
+				daysBetweenYear += countDaysDifMonth(date,d1);
 			}
         }else{
             difYear = d.getYear() - date.getYear();
@@ -203,12 +209,12 @@ public class Date {
 				for(int i = d.getYear(); i < difYear; i++){
 					daysBetweenYear += daysInYear(i);
 				} 
-				daysBetweenYear += date.countDaysDifMonth(d1);
+				daysBetweenYear += countDaysDifMonth(date, d1);
 			}else{
 				for(int i = d.getYear(); i < difYear - 1; i++){
 					daysBetweenYear += daysInYear(i);
 				} 
-				daysBetweenYear += date.countDaysDifMonth(d1);
+				daysBetweenYear += countDaysDifMonth(date,d1);
 			} 
         }
 		return daysBetweenYear; 
@@ -258,6 +264,6 @@ public class Date {
 		//daysBetween
 		System.out.print("The days between the date: " + date.toString());
 		System.out.print(" and the date: " + d.toString());
-		System.out.print(" are "+ date.daysBetween(d));
+		System.out.print(" are "+ date.countDaysDifMonth(date,d));
 	}
 }
