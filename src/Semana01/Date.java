@@ -162,27 +162,18 @@ public class Date {
 	}
 
 	private int countDaysDifMonth (Date date, Date d){
-		int daysBetweenMonth = 0; 
+		int daysMonth = 0; 
 		if(date.getMonth() > d.getMonth()){
 			for(int i = date.getMonth(); i > d.getMonth(); i--){
-				daysBetweenMonth += daysInMonth(i, year);
-			}
-			if(date.getDay() > d.getDay()){
-				daysBetweenMonth += countDays(date,d);
-			}else{
-				daysBetweenMonth -= countDays(date,d);
+				daysMonth += daysInMonth(i, year);
 			}
 		}else{
-			for(int i = d.getMonth(); i > date.getMonth(); i--){
-				daysBetweenMonth += daysInMonth(i, year);
-			}
-			if(date.getDay() > d.getDay()){
-				daysBetweenMonth += countDays(date,d);
-			}else{
-				daysBetweenMonth -= countDays(date,d);
+			for(int i = date.getMonth(); i < d.getMonth(); i++){
+				daysMonth += daysInMonth(i, year);
 			}
 		}
-		return daysBetweenMonth; 
+			daysMonth += countDays(date, d);
+		return daysMonth; 
 	}
 
 	private int countDaysDifYear(Date date, Date d){
@@ -264,6 +255,6 @@ public class Date {
 		//daysBetween
 		System.out.print("The days between the date: " + date.toString());
 		System.out.print(" and the date: " + d.toString());
-		System.out.print(" are "+ date.countDaysDifMonth(date,d));
+		System.out.print(" are "+ date.countDaysDifMonth2(date,d));
 	}
 }
