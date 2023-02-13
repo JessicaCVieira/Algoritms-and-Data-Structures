@@ -10,6 +10,7 @@ public class Date {
 	
 	//construtor
 	public Date (int month, int day, int year) {
+
 		if(!validDate(month, day, year))
 			throw new IllegalArgumentException("Invalid date!"); 
 		this.month = month; 
@@ -19,6 +20,7 @@ public class Date {
 	
 	//funções auxiliares ao construtor
 	private boolean validDate(int month, int day, int year) {
+
 		if(year < 0)
 			return false; 
 		if (month > 12 || month < 1)
@@ -29,6 +31,7 @@ public class Date {
 	}
 	
 	private int daysInMonth(int month, int year) {
+
 		int daysInMonth= 0; 
 		if (month == 2){
 			if (isBissexto(year)){
@@ -48,6 +51,7 @@ public class Date {
 	} 
 
 	private boolean isBissexto (int year){
+
 		if(div(year, 400)){
 			return true; 
 		}else if(div(year,4) && !div(year,100)){
@@ -58,6 +62,7 @@ public class Date {
 	}
 
 	private boolean div (int year, int n){
+
 		if((year % n) == 0){
 			return true; 
 		}else{
@@ -87,6 +92,7 @@ public class Date {
 	//Ex: 2
 	//Metodos
 	private boolean before(Date d){
+
 		Date date = new Date (month, day, year);
 		if(d.getYear() > date.getYear()){
 			return false; 
@@ -139,13 +145,12 @@ public class Date {
 			daysBetween = 0;
 		}else if(d.getYear() == date.getYear()){
 			if(d.getMonth() == date.getMonth()){
-				daysSameMonth(date,d);
+				daysBetween = daysSameMonth(date,d);
 			}else{
-				daysDifMonth(date, d); 
+				daysBetween = daysDifMonth(date, d); 
 			}
 		}else{
-			daysDifYear(date, d); 
-		
+			daysBetween = daysDifYear(date, d); 
 		}
 		return daysBetween;
 	}
@@ -162,6 +167,7 @@ public class Date {
 	}
 
 	private int daysDifMonth (Date date, Date d){
+
 		int daysMonth = 0; 
 		if(date.getMonth() > d.getMonth()){
 			for(int i = date.getMonth(); i > d.getMonth(); i--){
@@ -177,6 +183,7 @@ public class Date {
 	}
 
 	private int daysDifYear (Date date, Date d){
+
 		int daysBetweenYear1 = 0; 
 		if(date.getYear() > d.getYear()){
 			for(int i = date.getYear(); i > d.getYear(); i--){
@@ -192,6 +199,7 @@ public class Date {
 	}
 
 	private int daysInYear(int year){
+
 		int daysInYear = 0; 
 		if(isBissexto(year)){
 			daysInYear = 366; 
@@ -203,6 +211,7 @@ public class Date {
 
 	//main
 	public static void main(String[] args) {
+		
 		Scanner sc = new Scanner (System.in); 
 		//date
 		System.out.print("introduza o mês:");
