@@ -27,11 +27,11 @@ public class QuickFindUF{
 
     public static void main(String[] args) {
         for(int i = 1000; i < 256000 ; i*= 2){
-            QuickFindUF unionFind = new QuickFindUF(i);
+            QuickFindUF quickFind = new QuickFindUF(i);
             long start = System.currentTimeMillis(); 
             for(int j = 0; j < i; j++){
                 //TODO
-                unionFind.union(random, random);
+                quickFind.union(0/*random*/,0/*random */);
             }
             long end = System.currentTimeMillis(); 
         }
