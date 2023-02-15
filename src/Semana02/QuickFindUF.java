@@ -11,8 +11,8 @@ public class QuickFindUF{
         }
     }
 
-    public boolean connected(int p){
-        return id[p] == id[q]; //ñ sei pq é que está a dar erro, está igual aos dois ptt
+    public boolean connected(int p, int q){
+        return id[p] == id[q]; 
     }
     
     public void union(int p, int q){
