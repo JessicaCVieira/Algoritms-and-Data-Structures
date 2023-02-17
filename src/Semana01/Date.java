@@ -137,6 +137,7 @@ public class Date {
 		return dayssinceBeginYear; 
 	}
 
+
 	private int daysBetween(Date d){
 
 		Date date = new Date (month, day, year);
@@ -151,6 +152,9 @@ public class Date {
 			}
 		}else{
 			daysBetween = daysDifYear(date, d); 
+		}
+		if(before(d)){
+			daysBetween = daysBetween * -1; 
 		}
 		return daysBetween;
 	}
@@ -250,9 +254,9 @@ public class Date {
 		//dayssinceBeginYear
 		System.out.println("Days since the beginning of the year: " + date.dayssinceBeginYear());
 		//daysBetween
-		System.out.print("The days between the date: " + date.toString());
+		System.out.print("The  days between the date: " + date.toString());
 		System.out.print(" and the date: " + d.toString());
 		System.out.print(" are "+ date.daysDifMonth(date, d));
 	}
-	//TODO its wrong bithhhh
+	//TODO -> its wrong bitchhhh
 }
