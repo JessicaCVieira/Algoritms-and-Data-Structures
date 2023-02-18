@@ -96,12 +96,23 @@ public class Date {
 		Date date = new Date (month, day, year);
 		if(d.getYear() < date.getYear()){
 			return false; 
-		}else if(d.getMonth() < date.getMonth()){
-			return false;
-		}else if(d.getDay() < date.getDay()){
-			return false;
+		}else if(d.getYear() > date.getYear()){
+			return true; 
 		}else{
-			return true;
+			if(d.getMonth() < date.getMonth()){
+				return false;
+			}else if (d.getMonth() > date.getMonth()){
+				return true; 
+			}else{
+				if(d.getDay() < date.getDay()){
+					return false;
+				}else if(d.getDay() > date.getDay()){
+					return true;
+				}else{
+					System.out.print("They are the same date");
+					return true;
+				}
+			}
 		}
 	}
 
@@ -153,7 +164,7 @@ public class Date {
 		}else{
 			daysBetween = daysDifYear(date, d); 
 		}
-		if(before(d)){
+		if(!before(d)){
 			daysBetween = daysBetween * -1; 
 		}
 		return daysBetween;
@@ -162,10 +173,10 @@ public class Date {
 	//Aux
 	private int daysSameMonth (Date date, Date d){
 		int countDay = 0; 
-		if(before(d)){
+		if(d.getDay() > date.getDay()){
 			countDay = d.getDay() - date.getDay();
 		}else{
-			countDay = (date.getDay() - d.getDay()) * -1;
+			countDay = date.getDay() - d.getDay();
 		}
 		return countDay; 
 	}
@@ -173,19 +184,24 @@ public class Date {
 	private int daysDifMonth (Date date, Date d){
 
 		int daysMonth = 0; 
-		if(date.getMonth() > d.getMonth()){
-			for(int i = d.getMonth(); i < date.getMonth(); i++){
-				daysMonth += daysInMonth(i, year);
-			}
-		}else{
+		if(date.getMonth() < d.getMonth()){
 			for(int i = date.getMonth(); i < d.getMonth(); i++){
 				daysMonth += daysInMonth(i, year);
 			}
-		}
-		if(date.getDay() > d.getDay()){
-			daysMonth += daysSameMonth(date, d);
+			if(date.getDay() < d.getDay()){
+				daysMonth += daysSameMonth(date, d);
+			}else{
+				daysMonth -= daysSameMonth(date, d);
+			}
 		}else{
-			daysMonth -= daysSameMonth(date, d);
+			for(int i = d.getMonth(); i < date.getMonth(); i++){
+				daysMonth += daysInMonth(i, year);
+			}
+			if(date.getDay() < d.getDay()){
+				daysMonth -= daysSameMonth(date, d);
+			}else{
+				daysMonth += daysSameMonth(date, d);
+			}
 		}
 		return daysMonth; 
 	}
@@ -256,7 +272,7 @@ public class Date {
 		//daysBetween
 		System.out.print("The  days between the date: " + date.toString());
 		System.out.print(" and the date: " + d.toString());
-		System.out.print(" are "+ date.daysSameMonth(date, d));
+		System.out.print(" are "+ date.daysDifYear(date,d));
 	}
 	//TODO -> its wrong bitchhhh
 }
