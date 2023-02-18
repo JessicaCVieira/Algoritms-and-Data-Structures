@@ -94,11 +94,11 @@ public class Date {
 	private boolean before(Date d){
 
 		Date date = new Date (month, day, year);
-		if(d.getYear() > date.getYear()){
+		if(d.getYear() < date.getYear()){
 			return false; 
-		}else if(d.getMonth() > date.getMonth()){
+		}else if(d.getMonth() < date.getMonth()){
 			return false;
-		}else if(d.getDay() > date.getDay()){
+		}else if(d.getDay() < date.getDay()){
 			return false;
 		}else{
 			return true;
@@ -256,7 +256,7 @@ public class Date {
 		//daysBetween
 		System.out.print("The  days between the date: " + date.toString());
 		System.out.print(" and the date: " + d.toString());
-		System.out.print(" are "+ date.daysDifMonth(date, d));
+		System.out.print(" are "+ date.daysSameMonth(date, d));
 	}
 	//TODO -> its wrong bitchhhh
 }
