@@ -162,10 +162,10 @@ public class Date {
 	//Aux
 	private int daysSameMonth (Date date, Date d){
 		int countDay = 0; 
-		if(d.getDay() > date.getDay()){
+		if(before(d)){
 			countDay = d.getDay() - date.getDay();
 		}else{
-			countDay = date.getDay() - d.getDay();
+			countDay = (date.getDay() - d.getDay()) * -1;
 		}
 		return countDay; 
 	}
