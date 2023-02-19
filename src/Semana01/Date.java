@@ -141,9 +141,9 @@ public class Date {
 			for(int i = date.getMonth(); i > d.getMonth(); i--){
 				dayssinceBeginYear += daysInMonth(i, year);
 			}
-			dayssinceBeginYear += date.getDay() - d.getDay();
+			dayssinceBeginYear += date.getDay() - d.getDay() + 1;
 		}else{
-			dayssinceBeginYear += date.getDay() - d.getDay(); 
+			dayssinceBeginYear += date.getDay() - d.getDay() + 1; 
 		}
 		return dayssinceBeginYear; 
 	}
@@ -214,9 +214,9 @@ public class Date {
 				daysBetweenYear1 += daysInYear(i);
 			}
 			if(date.getMonth() > d.getMonth()){
-				daysBetweenYear1 += daysDifMonth(date, d, date.getYear());
+				daysBetweenYear1 += daysDifMonth(date, d, date.getYear()) + 1;
 			}else{
-				daysBetweenYear1 -= daysDifMonth(date, d, date.getYear());
+				daysBetweenYear1 -= daysDifMonth(date, d, date.getYear()) + 1;
 			}
 		}else{
 			for(int i = date.getYear(); i < d.getYear(); i++){
