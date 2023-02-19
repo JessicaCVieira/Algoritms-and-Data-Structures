@@ -216,13 +216,13 @@ public class Date {
 			if(date.getMonth() > d.getMonth()){
 				daysBetweenYear1 += daysDifMonth(date, d, date.getYear());
 			}else{
-				daysBetweenYear1 -= daysDifMonth(date, d, date.getYear()) + 1;
+				daysBetweenYear1 -= daysDifMonth(date, d, date.getYear());
 			}
 		}else{
 			for(int i = date.getYear(); i < d.getYear(); i++){
 				daysBetweenYear1 += daysInYear(i);
 			}if(date.getMonth() > d.getMonth()){
-				daysBetweenYear1 -= daysDifMonth(date, d, d.getYear()) + 1;
+				daysBetweenYear1 -= daysDifMonth(date, d, d.getYear());
 			}else{
 				daysBetweenYear1 += daysDifMonth(date, d, d.getYear());
 			}
