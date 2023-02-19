@@ -278,5 +278,4 @@ public class Date {
 		System.out.print(" and the date: " + d.toString());
 		System.out.print(" are "+ date.daysBetween(d));
 	}
-	
 }
