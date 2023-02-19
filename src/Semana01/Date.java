@@ -159,7 +159,7 @@ public class Date {
 			if(d.getMonth() == date.getMonth()){
 				daysBetween = daysSameMonth(date,d);
 			}else{
-				daysBetween = daysDifMonth(date, d); 
+				daysBetween = daysDifMonth(date, d, date.getYear()); 
 			}
 		}else{
 			daysBetween = daysDifYear(date, d); 
@@ -181,7 +181,7 @@ public class Date {
 		return countDay; 
 	}
 
-	private int daysDifMonth (Date date, Date d){
+	private int daysDifMonth (Date date, Date d, int year){
 
 		int daysMonth = 0; 
 		if(date.getMonth() < d.getMonth()){
@@ -210,18 +210,22 @@ public class Date {
 
 		int daysBetweenYear1 = 0; 
 		if(date.getYear() > d.getYear()){
-			for(int i = date.getYear(); i > d.getYear(); i--){
+			for(int i = d.getYear(); i < date.getYear(); i++){
 				daysBetweenYear1 += daysInYear(i);
 			}
-		}else{
-			for(int i = d.getYear(); i > date.getYear(); i--){
-				daysBetweenYear1 += daysInYear(i);
+			if(date.getMonth() > d.getMonth()){
+				daysBetweenYear1 += daysDifMonth(date, d, date.getYear());
+			}else{
+				daysBetweenYear1 -= daysDifMonth(date, d, date.getYear()) + 1;
 			}
-		}
-		if(date.getMonth() > d.getMonth()){
-			daysBetweenYear1 += daysDifMonth(date, d);
 		}else{
-			daysBetweenYear1 -= daysDifMonth(date, d);
+			for(int i = date.getYear(); i < d.getYear(); i++){
+				daysBetweenYear1 += daysInYear(i);
+			}if(date.getMonth() > d.getMonth()){
+				daysBetweenYear1 -= daysDifMonth(date, d, d.getYear()) + 1;
+			}else{
+				daysBetweenYear1 += daysDifMonth(date, d, d.getYear());
+			}
 		}
 		return daysBetweenYear1; 
 	}
@@ -272,7 +276,7 @@ public class Date {
 		//daysBetween
 		System.out.print("The  days between the date: " + date.toString());
 		System.out.print(" and the date: " + d.toString());
-		System.out.print(" are "+ date.daysDifYear(date,d));
+		System.out.print(" are "+ date.daysBetween(d));
 	}
-	//TODO -> its wrong bitchhhh
+	
 }
