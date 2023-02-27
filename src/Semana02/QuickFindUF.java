@@ -1,5 +1,7 @@
 package Semana02;
 
+import java.util.Random;
+
 public class QuickFindUF{
 
     private int[] id; 
@@ -26,14 +28,32 @@ public class QuickFindUF{
     }
 
     public static void main(String[] args) {
-        for(int i = 1000; i < 256000 ; i*= 2){
+        int count = 0; 
+        long previousTime = 0; 
+        long ratio = 0; 
+        double logaritmo = 0; 
+        long averageRatio = 0; 
+        long estimatedTime = 0; 
+        for(int i = 1000; i <= 256000 ; i*= 2){
             QuickFindUF quickFind = new QuickFindUF(i);
             long start = System.currentTimeMillis(); 
+            count = count++; 
             for(int j = 0; j < i; j++){
-                //TODO
-                quickFind.union(0/*random*/,0/*random */);
+                Random random = new Random(); 
+                quickFind.union(random.nextInt(i), random.nextInt(i));
             }
             long end = System.currentTimeMillis(); 
+
+            long time = end-start; 
+            if(previousTime!=0){
+                ratio = time / previousTime; 
+                logaritmo = Math.log(ratio) / Math.log(2) ; 
+            } 
+
+            averageRatio = averageRatio/count; 
+            estimatedTime = averageRatio * 10^9; 
+
+            //TODO -> calcular a razão, o tn e o algoritmo dentro deste for
         }
 
     }
