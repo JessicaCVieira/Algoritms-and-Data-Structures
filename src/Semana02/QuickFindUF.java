@@ -53,7 +53,9 @@ public class QuickFindUF{
             averageRatio = averageRatio/count; 
             estimatedTime = averageRatio * 10^9; 
 
-            //TODO -> calcular a razão, o tn e o algoritmo dentro deste for
+            //TODO -> previous time 
+            //TODO -> System.out.prints (a tabela dos dados)
+            System.out.println("N\t");
         }
 
     }
