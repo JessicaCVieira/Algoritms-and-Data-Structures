@@ -51,10 +51,10 @@ public class QuickFindUF{
             long time = end-start; 
             
             if(previousTime!=0){
-                ratio =  (time / previousTime); 
-                log = (Math.log(ratio) / Math.log(2)) ; 
+                ratio =  time / previousTime; 
+                log = Math.log(ratio) / Math.log(2); 
             } 
-            
+
             previousTime = time; 
 
             System.out.println(i + "\t\t" + time + "\t\t" + ratio + "\t\t" + log); 

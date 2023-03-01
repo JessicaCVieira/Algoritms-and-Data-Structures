@@ -16,6 +16,7 @@ public class WeightedQUPathCompressionUF {
 
     private int root(int i){
         while (i != id[i]){
+            id[i] = id[id[i]]; 
             i = id[i];
         }
         return i;
@@ -41,31 +42,36 @@ public class WeightedQUPathCompressionUF {
     }
 
     public static void main(String[] args) {
-        int count = 0; 
+        
         long previousTime = 0; 
         long ratio = 0; 
-        double logaritmo = 0; 
-        long averageRatio = 0; 
-        long estimatedTime = 0; 
+        double log = 0; 
+
+        //header
+        System.out.println("N\t\tT(N)\t\tRatio\t\tLog(Ratio)");
+        
         for(int i = 1000; i <= 256000 ; i*= 2){
             WeightedQUPathCompressionUF pathCompression = new WeightedQUPathCompressionUF(i);
+            
             long start = System.currentTimeMillis(); 
-            count = count++; 
+            
             for(int j = 0; j < i; j++){
                 Random random = new Random(); 
-                pathCompression.union(random.nextInt(i), random.nextInt(i));
+                pathCompression.union(random.nextInt(i), random.nextInt(i)); // aqui esta a mandar um nullpointerexception
             }
+
             long end = System.currentTimeMillis(); 
 
             long time = end-start; 
-            previousTime = time; 
-
+            
             if(previousTime!=0){
                 ratio = time / previousTime; 
-                logaritmo = Math.log(ratio) / Math.log(2) ; 
+                log = Math.log(ratio) / Math.log(2) ; 
             } 
 
-            System.out.println("N\t\tT(N)\t\tRatio\t\tlog(Ratio)");
+            previousTime = time; 
+
+            System.out.println(i + "\t\t" + time + "\t\t" + ratio + "\t\t" + log); 
         }
 
     }
