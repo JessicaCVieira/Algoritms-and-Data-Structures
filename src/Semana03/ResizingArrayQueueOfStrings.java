@@ -30,7 +30,7 @@ public class ResizingArrayQueueOfStrings {
         q[last] = item; 
 
         //vazia: 
-        if(first == -1) first = last; 
+        if(isEmpty()) first = last; 
 
         //não precisamos de fazer nada se só tiver um elemento, no dequeue já temos de fazer coisas quando o array só tem 1 elemento
     }

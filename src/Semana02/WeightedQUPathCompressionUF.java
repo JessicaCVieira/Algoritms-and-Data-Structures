@@ -65,8 +65,6 @@ public class WeightedQUPathCompressionUF {
                 logaritmo = Math.log(ratio) / Math.log(2) ; 
             } 
 
-            //TODO -> previous time 
-            //TODO -> System.out.prints (a tabela dos dados)
             System.out.println("N\t\tT(N)\t\tRatio\t\tlog(Ratio)");
         }
 

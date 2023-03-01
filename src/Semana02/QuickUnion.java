@@ -54,12 +54,7 @@ public class QuickUnion {
                 logaritmo = Math.log(ratio) / Math.log(2) ; 
             } 
 
-            averageRatio = averageRatio/count; 
-            estimatedTime = averageRatio * 10^9; 
-
-            //TODO -> previous time 
-            //TODO -> System.out.prints (a tabela dos dados)
-            System.out.println("N\t");
+            System.out.println("N\t\tT(N)\t\tRatio\t\tlog(Ratio)");
         }
 
     }
