@@ -6,7 +6,7 @@ public class QuickUnion {
     
     private int[] id;  
 
-    public void QuickUnionUF(int N) {
+    public QuickUnion(int N) {
         id = new int[N];
         for (int i = 0; i < N; i++){
             id[i] = i;
@@ -38,7 +38,7 @@ public class QuickUnion {
         long averageRatio = 0; 
         long estimatedTime = 0; 
         for(int i = 1000; i <= 256000 ; i*= 2){
-            QuickUnionUF quickUnion = new QuickUnionUF(i); //ver pq é que está errado
+            QuickUnion quickUnion = new QuickUnion(i); 
             long start = System.currentTimeMillis(); 
             count = count++; 
             for(int j = 0; j < i; j++){
@@ -48,6 +48,7 @@ public class QuickUnion {
             long end = System.currentTimeMillis(); 
 
             long time = end-start; 
+            previousTime = time; 
             if(previousTime!=0){
                 ratio = time / previousTime; 
                 logaritmo = Math.log(ratio) / Math.log(2) ; 

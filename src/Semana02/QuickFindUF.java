@@ -45,6 +45,7 @@ public class QuickFindUF{
             long end = System.currentTimeMillis(); 
 
             long time = end-start; 
+            previousTime = time; 
             if(previousTime!=0){
                 ratio = time / previousTime; 
                 logaritmo = Math.log(ratio) / Math.log(2) ; 

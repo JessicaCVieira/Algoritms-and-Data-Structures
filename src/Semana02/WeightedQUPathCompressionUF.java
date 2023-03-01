@@ -7,7 +7,7 @@ public class WeightedQUPathCompressionUF {
     private int[] id;
     private int[] sz;  
 
-    public void QuickUnionUF(int N) {
+    public WeightedQUPathCompressionUF (int N) {
         id = new int[N];
         for (int i = 0; i < N; i++){
             id[i] = i;
@@ -48,27 +48,26 @@ public class WeightedQUPathCompressionUF {
         long averageRatio = 0; 
         long estimatedTime = 0; 
         for(int i = 1000; i <= 256000 ; i*= 2){
-            QuickUnionUF quickFind = new QuickUnionUF(i);
+            WeightedQUPathCompressionUF pathCompression = new WeightedQUPathCompressionUF(i);
             long start = System.currentTimeMillis(); 
             count = count++; 
             for(int j = 0; j < i; j++){
                 Random random = new Random(); 
-                WeightedQUPathCompressionUF.union(random.nextInt(i), random.nextInt(i));
+                pathCompression.union(random.nextInt(i), random.nextInt(i));
             }
             long end = System.currentTimeMillis(); 
 
             long time = end-start; 
+            previousTime = time; 
+
             if(previousTime!=0){
                 ratio = time / previousTime; 
                 logaritmo = Math.log(ratio) / Math.log(2) ; 
             } 
 
-            averageRatio = averageRatio/count; 
-            estimatedTime = averageRatio * 10^9; 
-
             //TODO -> previous time 
             //TODO -> System.out.prints (a tabela dos dados)
-            System.out.println("N\t");
+            System.out.println("N\t\tT(N)\t\tRatio\t\tlog(Ratio)");
         }
 
     }
