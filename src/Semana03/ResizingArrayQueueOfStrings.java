@@ -22,8 +22,16 @@ public class ResizingArrayQueueOfStrings {
 
     //add an item
     public void enqueue(String item){
-        //cheia 
-        //TODO -> Redimensionar 
+        //cheia resized
+        if(next(last)==first){
+            String[] p = new String[2*q.length]; 
+            q[first] = p[0];
+            q[last] = p[q.length - 1];
+            for(int i = 1; i < q.length - 1; i++){
+                q[first + i] = p[i]; 
+            }
+            p[last] = item; 
+        }
 
         //caso geral:
         last = next(last); 
@@ -37,7 +45,19 @@ public class ResizingArrayQueueOfStrings {
 
     //remove the least recently added item
     public String dequeue(){
+        //cheia
+        if(next(last)==first){
+            q[]
+        }
 
+
+        //1 elemento (temos de fazer resize aqui)
+        //caso geral
+
+
+
+        //vazia
+        //recize quando está a 1/4 está a ser usado e o resto não
     } 
 
     //is the queue empty?
