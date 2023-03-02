@@ -31,6 +31,8 @@ public class ResizingArrayQueueOfStrings {
             for(int i = 1; i < q.length - 1; i++){
                 q[first + i] = p[i]; 
             }
+            first = 0; 
+            last = q.length; 
             p[last] = item; 
             this.q = p; 
         }
@@ -46,20 +48,40 @@ public class ResizingArrayQueueOfStrings {
     }
 
     //remove the least recently added item
-    public String dequeue(){
-        //cheia
-        if(next(last)==first){
-            q[]
-        }
-
+    public String dequeue(){   //temos que mostrar o item que removemos na consola? 
 
         //1 elemento (temos de fazer resize aqui)
-        //caso geral
+        if(first == last && 0 <= first && first <= q.length - 1){
+            q[first] = null; 
+        }
 
-
+        //a 1/4 resize
 
         //vazia
         //recize quando está a 1/4 está a ser usado e o resto não
+        //caso geral
+        q[first] = null;
+        first = first + 1;  
+        int dif = 0; 
+        if(q.length == 0.25*q.length){
+            String[] p = new String[(int)0.5*q.length];
+            q[first] = p[0];
+            if(first > last){
+                dif = first - last;
+            }else{
+                dif = last - first; 
+            }
+            q[last] = p[dif];
+            for(int i = 1; i < dif - 1; i++){
+                q[first + i] = p[i]; 
+            }
+            first = 0; 
+            last = dif;
+            this.q = p; 
+
+
+        }
+        return q[first]; 
     } 
 
     //is the queue empty?
@@ -74,7 +96,6 @@ public class ResizingArrayQueueOfStrings {
             return last - first + 1;
         else
             return last + 1 + q.length - first; 
-     
 
     } 
 
