@@ -23,6 +23,7 @@ public class ResizingArrayQueueOfStrings {
     //add an item
     public void enqueue(String item){
         //cheia resized
+        //criei outro vetor e no final atualizei o vetor "inicial"
         if(next(last)==first){
             String[] p = new String[2*q.length]; 
             q[first] = p[0];
@@ -31,6 +32,7 @@ public class ResizingArrayQueueOfStrings {
                 q[first + i] = p[i]; 
             }
             p[last] = item; 
+            this.q = p; 
         }
 
         //caso geral:
