@@ -32,9 +32,9 @@ public class QuickUnion {
 
     public static void main(String[] args) {
         
-        long previousTime = 0; 
-        double ratio = 0; 
-        double log = 0; 
+        double previousTime = 0.0; 
+        double ratio = 0.0; 
+        double log = 0.0; 
        
         //header
         System.out.println("N\t\tT(N)\t\tRatio\t\tLog(Ratio)");
@@ -42,25 +42,24 @@ public class QuickUnion {
         for(int i = 1000; i <= 256000 ; i*= 2){
             QuickUnion quickUnion = new QuickUnion(i);
 
-            long start = System.currentTimeMillis(); 
+            double start = System.currentTimeMillis(); 
              
             for(int j = 0; j < i; j++){
                 Random random = new Random(); 
                 quickUnion.union(random.nextInt(i), random.nextInt(i));
             }
 
-            long end = System.currentTimeMillis(); 
+            double end = System.currentTimeMillis(); 
 
-            long time = end-start; 
+            double time = (end-start)/1000.0; 
 
             if(previousTime!=0){
-                ratio = time / previousTime; 
-                log = Math.log(ratio) / Math.log(2) ; 
+                ratio = Math.round((time / previousTime)*1000.0)/1000.0; 
+                log = Math.round((Math.log10(ratio) / Math.log10(2))*1000.0)/1000.0 ; 
             } 
 
-            previousTime = time; 
-
-            System.out.println(i + "\t\t" + time + "\t\t" + ratio + "\t\t" + log); 
+            System.out.println(i + "\t\t" + time + "\t\t" + ratio + "\t\t" + log);
+            previousTime = time;  
         }
 
     }

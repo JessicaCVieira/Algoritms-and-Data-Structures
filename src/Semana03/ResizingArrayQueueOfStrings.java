@@ -24,6 +24,7 @@ public class ResizingArrayQueueOfStrings {
     public void enqueue(String item){
         //cheia resized
         //criei outro vetor e no final atualizei o vetor "inicial"
+        //Acho que está certo mas tenho de ver os casos em que o first pode ser maior que o last e os em que o last é maior que o first pq isto tem aquela coisas circular
         if(next(last)==first){
             String[] p = new String[2*q.length]; 
             q[first] = p[0];
