@@ -34,9 +34,9 @@ public class QuickFindUF{
         double log = 0.0; 
 
         //header
-        System.out.println("N\t\tT(N)\t\tRatio\t\tLog(Ratio)");
+        System.out.println("N\t\tT(N) (s)\t\tRatio\t\tLog(Ratio)");
 
-        for(int i = 1000; i <= 256000 ; i*= 2){
+        for(int i = 1000; i <= 512000 ; i*= 2){
             QuickFindUF quickFind = new QuickFindUF(i);
 
             double start = System.currentTimeMillis(); 

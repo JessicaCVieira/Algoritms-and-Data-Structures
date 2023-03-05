@@ -50,9 +50,9 @@ public class WeightedQUPathCompressionUF {
         double log = 0.0; 
 
         //header
-        System.out.println("N\t\tT(N)\t\tRatio\t\tLog(Ratio)");
+        System.out.println("N\t\tT(N) (s)\t\tRatio\t\tLog(Ratio)");
         
-        for(int i = 1000; i <= 256000 ; i*= 2){
+        for(int i = 1000; i <= 32000; i*= 2){
             WeightedQUPathCompressionUF pathCompression = new WeightedQUPathCompressionUF(i);
             
             double start = System.currentTimeMillis(); 
