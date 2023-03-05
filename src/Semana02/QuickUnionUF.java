@@ -2,11 +2,11 @@ package Semana02;
 
 import java.util.Random;
 
-public class QuickUnion {
+public class QuickUnionUF {
     
     private int[] id;  
 
-    public QuickUnion(int N) {
+    public QuickUnionUF(int N) {
         id = new int[N];
         for (int i = 0; i < N; i++){
             id[i] = i;
@@ -40,7 +40,7 @@ public class QuickUnion {
         System.out.println("N\t\tT(N) (s)\t\tRatio\t\tLog(Ratio)");
 
         for(int i = 1000; i <= 128000; i*= 2){
-            QuickUnion quickUnion = new QuickUnion(i);
+            QuickUnionUF quickUnion = new QuickUnionUF(i);
 
             double start = System.currentTimeMillis(); 
              
