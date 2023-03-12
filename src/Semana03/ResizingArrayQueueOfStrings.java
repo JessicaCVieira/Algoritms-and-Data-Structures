@@ -1,5 +1,4 @@
-package Semana03;
-//tenho de eliminar a package
+package Semana03; 
 
 import java.util.Scanner;
 
@@ -20,69 +19,47 @@ public class ResizingArrayQueueOfStrings {
         return (i + 1) % q.length; 
     }
 
-    //add an item
     public void enqueue(String item){
-        //cheia resized
-        //criei outro vetor e no final atualizei o vetor "inicial"
-        //Acho que está certo mas tenho de ver os casos em que o first pode ser maior que o last e os em que o last é maior que o first pq isto tem aquela coisas circular
-        if(next(last)==first){
-            String[] p = new String[2*q.length]; 
-            q[first] = p[0];
-            q[last] = p[q.length - 1];
-            for(int i = 1; i < q.length - 1; i++){
-                q[first + i] = p[i]; 
-            }
-            first = 0; 
-            last = q.length; 
-            p[last] = item; 
-            this.q = p; 
-        }
-
-        //caso geral:
+        //caso geral: 
         last = next(last); 
         q[last] = item; 
 
+        //Cheia
+        if(size() == q.length){
+            resize(q.length*2); 
+        }
+        int next = next(last); 
+        q [next] = item; 
+        last = next; 
+
+        if (first == -1){
+            first = 0; 
+        }   
+
         //vazia: 
         if(isEmpty()) first = last; 
-
-        //não precisamos de fazer nada se só tiver um elemento, no dequeue já temos de fazer coisas quando o array só tem 1 elemento
+        
     }
 
     //remove the least recently added item
-    public String dequeue(){   //temos que mostrar o item que removemos na consola? 
-
-        //1 elemento (temos de fazer resize aqui)
-        if(first == last && 0 <= first && first <= q.length - 1){
-            q[first] = null; 
-        }
-
-        //a 1/4 resize
+    public String dequeue(){ 
 
         //vazia
-        //recize quando está a 1/4 está a ser usado e o resto não
-        //caso geral
-        q[first] = null;
-        first = first + 1;  
-        int dif = 0; 
-        if(q.length == 0.25*q.length){
-            String[] p = new String[(int)0.5*q.length];
-            q[first] = p[0];
-            if(first > last){
-                dif = first - last;
-            }else{
-                dif = last - first; 
-            }
-            q[last] = p[dif];
-            for(int i = 1; i < dif - 1; i++){
-                q[first + i] = p[i]; 
-            }
-            first = 0; 
-            last = dif;
-            this.q = p; 
+        if(isEmpty()) throw new IllegalStateException("Empty queue"); 
+      
+        String item = q[first]; 
+        q[first] = null; 
 
-
+        if(first == last){
+            last = -1;
+            first = -1; 
+        }else{
+            first = next(first); 
         }
-        return q[first]; 
+       
+        if(size() > 0 && size() == (q.length/4)) resize (q.length/2); 
+
+        return item; 
     } 
 
     //is the queue empty?
@@ -93,23 +70,38 @@ public class ResizingArrayQueueOfStrings {
 
     //number of items in the queue
     public int size(){
-        if(first <= last)
+        if(first == -1) return 0; 
+        if( first <= last )
             return last - first + 1;
         else
             return last + 1 + q.length - first; 
 
     } 
 
+    private void resize(int capacity){
+        String[] p = new String[capacity]; 
+        int a = 0; 
+        for(int i = 0; i < size(); i++){
+            p[a] = q[first]; 
+            first = next(first); 
+            a++; 
+        }
+    }
+
+    public String tostring(){
+        return String.format("{first: %d, last:%d}", first, last);
+    }
+
     public static void main(String[] args) {
-        ResizingArrayQueueOfStrings queue = new ResizingArrayQueueOfStrings ();
+        ResizingArrayQueueOfStrings queue = new ResizingArrayQueueOfStrings();
         Scanner sc = new Scanner(System.in);
         while(true) {
             String word = sc.next();
-           if(word.equals("end")) break; 
-                if(word.equals("-"))
-                    System.out.print(queue.dequeue()); 
-                else
-                    queue.enqueue(word);
+            if(word.equals("end")) break; 
+            if(word.equals("-"))
+                System.out.println(queue.dequeue()); 
+            else
+                queue.enqueue(word);
         }
         sc.close(); 
         System.out.println(queue.toString());

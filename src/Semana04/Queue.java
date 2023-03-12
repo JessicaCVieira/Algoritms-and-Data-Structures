@@ -1,6 +1,7 @@
-package Semana04
+package Semana04;
 
-importjava.util.iterator; 
+import java.util.Iterator; 
+import java.util.Scanner; 
 
 public class Queue<Item> implements Iterable<Item>{
     
@@ -18,8 +19,12 @@ public class Queue<Item> implements Iterable<Item>{
     }
 
     public void enqueue(Item item){
+        //caso geral 
+
+
         //caso problemático, fila vazia 
 
+        //dizer se cada método é linear etc etc 
     }
 
     public Item dequeue (){
@@ -31,6 +36,7 @@ public class Queue<Item> implements Iterable<Item>{
     }
 
     public int size(){
+        //caso critico vazia
 
     }
 
@@ -41,10 +47,38 @@ public class Queue<Item> implements Iterable<Item>{
     }
 
     private class QueueIterator implements Iterator<Item> {
-        
 
+        Node cur = first; 
 
+        public boolean hasNext(){
+            //acho que tenho de terminar
+            return false; 
+        }
+
+        public Item next(){
+            //terminar
+            return null; 
+        }
 
     }
+
+    public static void main(String[] args){
+        Queue<String> queue = new Queue<String> (); 
+        Scanner sc = new Scanner (System.in);
+        while(true){
+            String word = sc.next(); 
+            if(word.equals ("end")) break; 
+                if(word.equals("-"))
+                    System.out.println(queue.dequeue()); 
+                else
+                    queue.enqueue(word);
+        } 
+        sc.close(); 
+        for(String str: queue){
+            System.out.print(str + " ");
+        }
+    }
+
+
 
 }
