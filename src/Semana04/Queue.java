@@ -27,7 +27,7 @@ public class Queue<Item> implements Iterable<Item>{
         //dizer se cada método é linear etc etc 
     }
 
-    public Item dequeue (){
+    public Item dequeue(){
         //caso critico ser o ultimo elemento
     }
 
