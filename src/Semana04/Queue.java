@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 //n esquecer de dizer se cada metodo é linear etcccc
 
-public class Queue<Item> implements Iterable<Item>{
+public class Queue<Item> implements Iterable<Item> {
     
     private Node first, last;
     private int n;  
@@ -96,7 +96,5 @@ public class Queue<Item> implements Iterable<Item>{
             System.out.print(str + " ");
         }
     }
-
-
 
 }

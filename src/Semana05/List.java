@@ -12,6 +12,7 @@ public class List<Item> implements Iterable<Item>{
         //TODO
         Item item; 
         Node next; 
+        Node prev; 
     }
 
 
@@ -34,8 +35,28 @@ public class List<Item> implements Iterable<Item>{
     }
 
     public boolean removeFirst(Item item){
-        //comparar items usar equals; 
-        
+        if(!isEmpty()){
+            Node node = first; 
+            while(node != null){
+                if(node.item.equals(item)){
+                    if(node == first){
+                        first = first.next; 
+                        first.prev = null;    // falta definir o prev
+                    }else if(node == last){
+                        last = last.prev; 
+                        last.next = null; 
+                    }else{
+                        node.prev.next = node.next; 
+                        node.next.prev = node.prev; 
+                    }
+                    return true; 
+                }
+                node = node.next; 
+            }
+        }
+        return false; 
+
+        //falta a exceção para quando só tem 1 elemento;
 
     } 	
 
@@ -84,6 +105,12 @@ public class List<Item> implements Iterable<Item>{
             node = node.next; 
             return item; 
             //guardar o valor e andar com o current (current.next)
+        }
+
+        public Item prev(){
+            Item item = node.item; 
+            node = node.prev; 
+            return item; 
         }
 
     }
