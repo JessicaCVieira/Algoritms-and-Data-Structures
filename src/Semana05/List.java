@@ -5,9 +5,13 @@ import java.util.Scanner;
 
 public class List<Item> implements Iterable<Item>{
     
-    private Node first, last; 
+    private Node first, last;
+    private int n; 
+
     private class Node{
         //TODO
+        Item item; 
+        Node next; 
     }
 
 
@@ -16,18 +20,22 @@ public class List<Item> implements Iterable<Item>{
     }			
 
     public void add(Item item) {
-        //mt parecido c o enqueue
-        //TODO pensar no caso geral 
-        // TODO corrigir para os casos críticos 
-        // e se a lista estier fazia 
-        //e se for o primeiro elemento 
-        // e se for o ultimo 
-        // e se estiver cheia 
-        //n esquecer de fazer a ligação dos nodes 
+
+        Node node = new Node(); 
+        node.item = item; 
+
+        if(first ==  null){
+            first = node; 
+        }else{
+            last.next = node; 
+        }
+        last = node; 
+        n++; 
     }
 
     public boolean removeFirst(Item item){
         //comparar items usar equals; 
+        
 
     } 	
 
@@ -44,11 +52,18 @@ public class List<Item> implements Iterable<Item>{
     }	
 
     public boolean contains(Item item){
-
+        Iterator<Item> it = iterator(); 
+        while(it.hasNext()){
+            Item itemNode = it.next(); 
+            if(itemNode.equals(item)){
+                return true; 
+            }
+        }
+        return false; 
     } 	
 
     public int size() {
-
+        return n; 
     }		
 
     public Iterator<Item> iterator(){
@@ -57,14 +72,18 @@ public class List<Item> implements Iterable<Item>{
 
     private class ListIterator implements Iterator<Item>{
 
+        Node node = first; 
+
         public boolean hasNext(){
-            return false; 
+            return node != null; 
         }
 
         //guardar o valor e andar com o current (current.next)
         public Item next(){
+            Item item = node.item; 
+            node = node.next; 
+            return item; 
             //guardar o valor e andar com o current (current.next)
-            return null; 
         }
 
     }
@@ -72,9 +91,7 @@ public class List<Item> implements Iterable<Item>{
     //para testar 
 
     public static void main (String[] args){
-        //TODO criar uma lista
-        //inserir itens na lista
-        //n é preciso usar o scanner 
+    
         List<String> list = new List<String>(); 
         Scanner sc = new Scanner(System.in); 
         while(true) {
@@ -83,7 +100,7 @@ public class List<Item> implements Iterable<Item>{
                 break; 
             list.add(word); 
         }
-        //testar o remove first (repetir para cada metodo)
+        //repetir para cada metodo
         System.out.println("Que palavra quer remover?"); 
         String toRemoveFirst = sc.next(); 
         list.removeFirst(toRemoveFirst); 

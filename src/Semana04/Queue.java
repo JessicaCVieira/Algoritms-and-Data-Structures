@@ -3,42 +3,59 @@ package Semana04;
 import java.util.Iterator; 
 import java.util.Scanner; 
 
+//n esquecer de dizer se cada metodo é linear etcccc
+
 public class Queue<Item> implements Iterable<Item>{
     
-    Node first, last; 
+    private Node first, last;
+    private int n;  
+    
 
     private class Node{
         Item item; 
         Node next; 
     }
 
-    //create an em
     public Queue(){
         first = null; 
         last = null; 
+        n = 0; 
     }
 
     public void enqueue(Item item){
-        //caso geral 
-
-
-        //caso problemático, fila vazia 
-
-        //dizer se cada método é linear etc etc 
+        Node oldLast = last; 
+        last = new Node(); 
+        last.item = item; 
+        last.next = null; 
+        if(isEmpty()){
+            first = last; 
+        }else{
+            oldLast.next = last; 
+        }
+        n++; 
     }
 
     public Item dequeue(){
-        //caso critico ser o ultimo elemento
+        if(isEmpty()) throw new IllegalStateException("The queue is empty"); 
+        Item item = first.item; 
+        first = first.next; 
+        n--; 
+        if (isEmpty()) last = null; 
+        return item; 
     }
 
     public boolean isEmpty(){
-
+        if(first == null){
+            return true; 
+        }else{
+            return false; 
+        }
     }
 
     public int size(){
-        //caso critico vazia
-
+        return n;
     }
+
 
     //suport iteration
     @Override
@@ -51,13 +68,14 @@ public class Queue<Item> implements Iterable<Item>{
         Node cur = first; 
 
         public boolean hasNext(){
-            //acho que tenho de terminar
-            return false; 
+            return cur != null; 
         }
 
         public Item next(){
-            //terminar
-            return null; 
+            if(!hasNext()) throw new IllegalStateException("Não existe nenhum item"); 
+            Item item = cur.item; 
+            cur = cur.next; 
+            return item; 
         }
 
     }
