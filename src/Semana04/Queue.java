@@ -39,7 +39,7 @@ public class Queue<Item> implements Iterable<Item> {
         if(isEmpty()) throw new IllegalStateException("The queue is empty"); 
         Item item = first.item; 
         first = first.next; 
-        n--; 
+        //n--; 
         if (isEmpty()) last = null; 
         return item; 
     }
@@ -53,7 +53,7 @@ public class Queue<Item> implements Iterable<Item> {
     }
 
     public int size(){
-        return n;
+       return n; 
     }
 
 
