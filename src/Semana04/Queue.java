@@ -3,12 +3,10 @@ package Semana04;
 import java.util.Iterator; 
 import java.util.Scanner; 
 
-//n esquecer de dizer se cada metodo é linear etcccc
-
 public class Queue<Item> implements Iterable<Item> {
     
     private Node first, last;
-    private int n;  
+    private int s;  
     
 
     private class Node{
@@ -19,10 +17,12 @@ public class Queue<Item> implements Iterable<Item> {
     public Queue(){
         first = null; 
         last = null; 
-        n = 0; 
+        s = 0; 
     }
 
-    public void enqueue(Item item){
+    //Eficiência temporal: constante
+    //Eficiência espacial: constante
+    public void enqueue(Item item){  
         Node oldLast = last; 
         last = new Node(); 
         last.item = item; 
@@ -32,33 +32,37 @@ public class Queue<Item> implements Iterable<Item> {
         }else{
             oldLast.next = last; 
         }
-        n++; 
+        s++; 
     }
 
-    public Item dequeue(){
+    //Eficiência temporal: constante
+    //Eficiência espacial: constante
+    public Item dequeue(){   
         if(isEmpty()) throw new IllegalStateException("The queue is empty"); 
         Item item = first.item; 
         first = first.next; 
-        //n--; 
+        s--; 
         if (isEmpty()) last = null; 
         return item; 
     }
 
-    public boolean isEmpty(){
-        if(first == null){
-            return true; 
-        }else{
-            return false; 
-        }
+    //Eficiência temporal: constante
+    //Eficiência espacial: constante
+    public boolean isEmpty(){ 
+        return first == null; 
     }
 
-    public int size(){
-       return n; 
+    //Eficiência temporal: constante
+    //Eficiência espacial: constante
+    public int size(){  
+       return s; 
     }
 
 
     //suport iteration
     @Override
+    //Eficiência temporal: linear
+    //Eficiência temporal: constante
     public Iterator<Item> iterator(){
         return new QueueIterator(); 
     }
