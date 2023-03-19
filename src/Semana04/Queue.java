@@ -3,6 +3,8 @@ package Semana04;
 import java.util.Iterator; 
 import java.util.Scanner; 
 
+//Eficiência espacial: Linear
+
 public class Queue<Item> implements Iterable<Item> {
     
     private Node first, last;
@@ -21,7 +23,6 @@ public class Queue<Item> implements Iterable<Item> {
     }
 
     //Eficiência temporal: constante
-    //Eficiência espacial: constante
     public void enqueue(Item item){  
         Node oldLast = last; 
         last = new Node(); 
@@ -36,7 +37,6 @@ public class Queue<Item> implements Iterable<Item> {
     }
 
     //Eficiência temporal: constante
-    //Eficiência espacial: constante
     public Item dequeue(){   
         if(isEmpty()) throw new IllegalStateException("The queue is empty"); 
         Item item = first.item; 
@@ -47,13 +47,11 @@ public class Queue<Item> implements Iterable<Item> {
     }
 
     //Eficiência temporal: constante
-    //Eficiência espacial: constante
     public boolean isEmpty(){ 
         return first == null; 
     }
 
     //Eficiência temporal: constante
-    //Eficiência espacial: constante
     public int size(){  
        return s; 
     }
@@ -62,7 +60,6 @@ public class Queue<Item> implements Iterable<Item> {
     //suport iteration
     @Override
     //Eficiência temporal: linear
-    //Eficiência temporal: constante
     public Iterator<Item> iterator(){
         return new QueueIterator(); 
     }
