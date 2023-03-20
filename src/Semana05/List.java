@@ -6,18 +6,19 @@ import java.util.Scanner;
 public class List<Item> implements Iterable<Item>{
     
     private Node first, last;
-    private int n; 
+    private int s; 
 
     private class Node{
-        //TODO
         Item item; 
-        Node next; 
-        Node prev; 
+        Node next = null; 
+        Node prev = null; 
     }
 
 
     public List() {
-
+        first = null; 
+        last = null; 
+        s = 0; 
     }			
 
     public void add(Item item) {
@@ -31,7 +32,7 @@ public class List<Item> implements Iterable<Item>{
             last.next = node; 
         }
         last = node; 
-        n++; 
+        s++; 
     }
 
     public boolean removeFirst(Item item){
@@ -49,6 +50,7 @@ public class List<Item> implements Iterable<Item>{
                         node.prev.next = node.next; 
                         node.next.prev = node.prev; 
                     }
+                    s--; 
                     return true; 
                 }
                 node = node.next; 
@@ -57,11 +59,10 @@ public class List<Item> implements Iterable<Item>{
         return false; 
 
         //falta a exceção para quando só tem 1 elemento;
-
     } 	
 
     public boolean removeLast(Item item){
-
+       
     } 	
 
     public boolean removeAll(Item item){
@@ -69,7 +70,7 @@ public class List<Item> implements Iterable<Item>{
     }
     
     public boolean isEmpty() {
-
+        return s==0; 
     }	
 
     public boolean contains(Item item){
@@ -84,7 +85,7 @@ public class List<Item> implements Iterable<Item>{
     } 	
 
     public int size() {
-        return n; 
+        return s; 
     }		
 
     public Iterator<Item> iterator(){
@@ -101,17 +102,22 @@ public class List<Item> implements Iterable<Item>{
 
         //guardar o valor e andar com o current (current.next)
         public Item next(){
+            if(!hasNext()) throw new IllegalStateException("Não existe nenhum item"); 
             Item item = node.item; 
             node = node.next; 
             return item; 
-            //guardar o valor e andar com o current (current.next)
         }
 
-        public Item prev(){
-            Item item = node.item; 
-            node = node.prev; 
-            return item; 
-        }
+        // public boolean hasPrev(){
+        //     return node != null; 
+        // }
+
+        // public Item prev(){
+        //     if(!hasPrev()) throw new IllegalStateException("Não existe nenhum item");
+        //     Item item = node.item; 
+        //     node = node.prev; 
+        //     return item; 
+        // }
 
     }
 
