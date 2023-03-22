@@ -1,25 +1,29 @@
 package Semana06;
 
+
 //3 linhas de mudança de código
 //interface usado para não repetir codigo
-//n muda a ordem de grandeza mas o tempo é menor. tendem as 2 para o n^2
+//n muda a ordem de grandeza mas o tempo é menor. tendem as duas para o n^2
 
 public class InsertionUpdated {
     public static <T extends Comparable<T>>void sort(T[] array){
-        for(int i = 0; i < array.length; i++){
-            for(int j = i; j > 0; j--){ //este for é diferente
-                if(array[j].compareTo(array[j-1]) < 0) { //comp
-                    //trocar sem usar o exchange (o que é pedido no ex)
-                    T aux = array[j]; 
+        for(int i = 1; i < array.length; i++){
+            T aux = array[i];
+            int j; 
+            for(j = i; j > 0; j--){ 
+                if(less(aux,array[j-1])) { //comp
                     array[j] = array[j - 1]; 
-                    array[j - 1] = aux; 
                 }else{
                     break;  
                 }
             }
+            array[j] = aux;
         }
     }
     
+    private static boolean less (Comparable t, Comparable e){
+        return t.compareTo(e) < 0; 
+    }
     public static void main(String[] args){
         //Definir o tamanho do array
         int n = 10; 
