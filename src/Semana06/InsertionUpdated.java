@@ -5,12 +5,12 @@ package Semana06;
 //n muda a ordem de grandeza mas o tempo é menor. tendem as 2 para o n^2
 
 public class InsertionUpdated {
-    public static void sort(Comparable[] array){
+    public static <T extends Comparable<T>>void sort(T[] array){
         for(int i = 0; i < array.length; i++){
-            for(int j = i; j > 0; j--){
-                if(array[j].compareTo(array[j-1]) < 0) { //comparação
+            for(int j = i; j > 0; j--){ //este for é diferente
+                if(array[j].compareTo(array[j-1]) < 0) { //comp
                     //trocar sem usar o exchange (o que é pedido no ex)
-                    Comparable aux = array[j]; 
+                    T aux = array[j]; 
                     array[j] = array[j - 1]; 
                     array[j - 1] = aux; 
                 }else{
