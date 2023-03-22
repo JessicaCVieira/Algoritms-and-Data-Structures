@@ -13,10 +13,11 @@ public class InsertionUpdated {
                 if (less(aux, array[j - 1])) { // comp
                     array[j] = array[j - 1];
                 } else {
+                    array[j] = aux;
                     break;
                 }
             }
-            array[j] = aux;
+            //array[j] = aux;
         }
     }
 
@@ -63,7 +64,7 @@ public class InsertionUpdated {
 
         System.out.println("N\t\tT(N) (s)\t\tRatio\t\tLog(Ratio)");
 
-        for (int i = ; i < ; i)
+        //for (int i = ; i < ; i)
 
 
     }
