@@ -57,6 +57,14 @@ public class InsertionUpdated {
 
         // Doubling Hypothesis
         System.out.println("Doubling Hipothesis:");
+        double prevTime = 0.0; 
+        double ratio = 0.0; 
+        double log = 0.0; 
+
+        System.out.println("N\t\tT(N) (s)\t\tRatio\t\tLog(Ratio)");
+
+        for (int i = ; i < ; i)
+
 
     }
 }
