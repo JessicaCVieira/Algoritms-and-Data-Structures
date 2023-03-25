@@ -57,7 +57,7 @@ public class List<Item> implements Iterable<Item>{
         return true; 
     }
 
-    //Remove last occurence
+    //Remove last occurrence
     public boolean removeLast(Item item) {
         if (isEmpty()) return false;
     
