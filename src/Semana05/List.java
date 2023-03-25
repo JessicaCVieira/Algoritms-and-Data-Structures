@@ -178,16 +178,43 @@ public class List<Item> implements Iterable<Item>{
                 break; 
             list.add(word); 
         }
-        //repetir para cada metodo
+        //Remove first
+        System.out.println("_____Remove First_____");
         System.out.println("Que palavra quer remover?"); 
         String toRemoveFirst = sc.next(); 
         list.removeFirst(toRemoveFirst); 
-        //imprimir a lista
+        
         System.out.print("Lista agora: ");
-        //for each (para cada item dessa lista)
+        
         for(String item : list)
             System.out.print(item + " "); 
-        System.out.println(); //imprime uma linha vazia
+        System.out.println();
+
+        //Remove last 
+        System.out.println("_____Remove Last_____");
+
+        System.out.println("Que palavra quer remover?"); 
+        String toRemoveLast = sc.next(); 
+        list.removeLast(toRemoveLast); 
+        
+        System.out.print("Lista agora: ");
+        
+        for(String item : list)
+            System.out.print(item + " "); 
+        System.out.println();
+
+        //Remove All
+        System.out.println("_____Remove All_____");
+
+        System.out.println("Que palavra quer remover?"); 
+        String toRemoveAll = sc.next(); 
+        list.removeAll(toRemoveAll); 
+        
+        System.out.print("Lista agora: ");
+        
+        for(String item : list)
+            System.out.print(item + " "); 
+        System.out.println(); 
 
     }
 }
