@@ -10,8 +10,7 @@ public class List<Item> implements Iterable<Item>{
 
     private class Node{
         Item item; 
-        Node next; 
-        Node prev; 
+        Node next;
     }
 
 
@@ -21,14 +20,14 @@ public class List<Item> implements Iterable<Item>{
         s = 0; 
     }			
 
-    //está certo
+    //Add item to the list
     public void add(Item item) {
 
         Node node = new Node(); 
         node.item = item; 
 
         if(first ==  null){
-            first = node; 
+            first = node;  
         }else{
             last.next = node; 
         }
@@ -36,7 +35,7 @@ public class List<Item> implements Iterable<Item>{
         s++; 
     }
 
-    //está certo
+    //Remove first occurence
     public boolean removeFirst(Item item){
         if(isEmpty()) return false; 
 
@@ -58,40 +57,36 @@ public class List<Item> implements Iterable<Item>{
         return true; 
     }
 
-    //tá errado
-    public boolean removeLast(Item item){
-       if(isEmpty()) return false; 
-
-        Node last = null; 
-        Node node = first; 
-        Node lastOccurNode = null; 
-
-        while(node != null){
-            if(node.item.equals(item)){
-                lastOccurNode = node; 
+    //Remove last occurence
+    public boolean removeLast(Item item) {
+        if (isEmpty()) return false;
+    
+        Node prev = null;
+        Node node = first;
+        Node last = null;
+    
+        while (node != null) {
+            if (node.item.equals(item)) {
+                last = node;
             }
-            last = node; 
-            node = node.next; 
-
-            if(node != null && node.next == null && lastOccurNode != null) break; 
-
+            prev = node;
+            node = node.next;
         }
-
-        if(lastOccurNode == null){
-            return false; 
+    
+        if (last == null) return false;
+    
+        if (last.next == null) {
+            prev.next = null;
+        } else {
+            last.item = last.next.item;
+            last.next = last.next.next;
         }
-
-        if(lastOccurNode == first){
-            first = first.next; 
-        }else{
-            last.next = lastOccurNode.next; 
-        }
-
+    
         s--;
-        return false; 
-    } 	
-
-    //está certo
+        return true;
+    }
+    
+    //Remove all items
     public boolean removeAll(Item item){
         boolean removido = false;
         while (removeFirst(item)) {
@@ -126,7 +121,6 @@ public class List<Item> implements Iterable<Item>{
     private class ListIterator implements Iterator<Item>{
 
         Node node = first; 
-        Node prev = null; 
 
         public boolean hasNext(){
             return node != null; 
@@ -134,28 +128,11 @@ public class List<Item> implements Iterable<Item>{
 
         public Item next(){
             if(!hasNext()) throw new IllegalStateException("Não existe nenhum item"); 
-            prev = node; 
             Item item = node.item; 
             node = node.next; 
             return item; 
         }
-
-        public boolean hasPrev(){
-            return prev != null; 
-        }
-
-        public Item prev(){
-            if(!hasPrev()) throw new IllegalStateException("Não existe nenhum item");
-
-            node = prev; 
-            prev = null; 
-            Item item = node.item; 
-            return item;
-        }
-
     }
-
-    //para testar 
 
     public static void main (String[] args){
     
