@@ -21,6 +21,7 @@ public class List<Item> implements Iterable<Item>{
         s = 0; 
     }			
 
+    //está certo
     public void add(Item item) {
 
         Node node = new Node(); 
@@ -35,83 +36,68 @@ public class List<Item> implements Iterable<Item>{
         s++; 
     }
 
+    //está certo
     public boolean removeFirst(Item item){
-        if(!isEmpty()){
-            Node node = first; 
-            while(node != null){
-                if(node.item.equals(item)){
-                    if(node == first){
-                        first = first.next; 
-                        first.prev = null;  
-                    }else if(node == last){
-                        last = last.prev; 
-                        last.next = null; 
-                    }else{
-                        node.prev.next = node.next; 
-                        node.next.prev = node.prev; 
-                    }
-                    s--; 
-                    return true; 
-                }
-                node = node.next; 
-            }
-        }
-        return false; 
-    //falta a exceção para quando só tem 1 elemento;
-    } 	
+        if(isEmpty()) return false; 
 
+        if(first.item.equals(item)){
+            first = first.next; 
+            s--; 
+            return true; 
+        }
+
+        Node node = first; 
+        while(node.next != null && !node.next.item.equals(item)){
+            node = node.next; 
+        }
+
+        if(node.next == null) return false; 
+
+        node.next = node.next.next; 
+        s--; 
+        return true; 
+    }
+
+    //tá errado
     public boolean removeLast(Item item){
-       if(!isEmpty()){
-            Node node = last; 
-            while(node != null){
-                if(node.item.equals(item)){
-                    if(node == last){
-                        last = last.prev; 
-                        last.next = null; 
-                    }else if (node == first){
-                        first = first.next; 
-                        first.prev = null; 
-                    }else{
-                        node.prev.next = node.prev; //n sei se está certo
-                        node.next.prev = node.next; //n sei se esta certo 
-                    }
-                    s--; 
-                    return true; 
-                }
-                node = node.prev; 
+       if(isEmpty()) return false; 
+
+        Node last = null; 
+        Node node = first; 
+        Node lastOccurNode = null; 
+
+        while(node != null){
+            if(node.item.equals(item)){
+                lastOccurNode = node; 
             }
+            last = node; 
+            node = node.next; 
+
+            if(node != null && node.next == null && lastOccurNode != null) break; 
+
         }
+
+        if(lastOccurNode == null){
+            return false; 
+        }
+
+        if(lastOccurNode == first){
+            first = first.next; 
+        }else{
+            last.next = lastOccurNode.next; 
+        }
+
+        s--;
         return false; 
-        //falta a excessão de quando só tem 1 elemento
     } 	
 
+    //está certo
     public boolean removeAll(Item item){
-
-        //TODO-> REFAZER
-
-        int count = 0; //indica o nº de vezes que o item aparece na lista, e que vai ser retirado
-        if(!isEmpty()){
-            Node node = first; 
-            while(node != null){
-                if(node.item.equals(item)){
-                    if(node == first){
-                        first = first.next; 
-                        first.prev = null;  
-                    }else if(node == last){
-                        last = last.prev; 
-                        last.next = null; 
-                    }else{
-                        node.prev.next = node.next; 
-                        node.next.prev = node.prev; 
-                    }
-                    s = s - count; //vai retirar o nº de vezes que aquele elemento aparece na lista logo n é -- 
-                    return true; 
-                }
-                node = node.next; 
-            }
+        boolean removido = false;
+        while (removeFirst(item)) {
+            removido = true;
         }
-        return false; 
-    //falta a exceção para quando só tem 1 elemento;
+        return removido;
     } 	
     
     public boolean isEmpty() {
@@ -140,28 +126,31 @@ public class List<Item> implements Iterable<Item>{
     private class ListIterator implements Iterator<Item>{
 
         Node node = first; 
+        Node prev = null; 
 
         public boolean hasNext(){
             return node != null; 
         }
 
-        //guardar o valor e andar com o current (current.next)
         public Item next(){
             if(!hasNext()) throw new IllegalStateException("Não existe nenhum item"); 
+            prev = node; 
             Item item = node.item; 
             node = node.next; 
             return item; 
         }
 
         public boolean hasPrev(){
-            return node != null; 
+            return prev != null; 
         }
 
         public Item prev(){
             if(!hasPrev()) throw new IllegalStateException("Não existe nenhum item");
+
+            node = prev; 
+            prev = null; 
             Item item = node.item; 
-            node = node.prev; 
-            return item; 
+            return item;
         }
 
     }
