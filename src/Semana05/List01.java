@@ -199,6 +199,7 @@ public class List01<Item> implements Iterable<Item> {
         for(String item : list)
             System.out.print(item + " "); 
         System.out.println(); //imprime uma linha vazia
+        sc.close(); 
     }
 }
     

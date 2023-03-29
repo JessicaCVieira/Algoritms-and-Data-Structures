@@ -155,6 +155,7 @@ public class ListGPT<Item> implements Iterable<Item> {
     
         ListGPT<String> list = new ListGPT<String>(); 
         Scanner sc = new Scanner(System.in); 
+        sc.close(); 
         while(true) {
             String word = sc.next(); 
             if(word.equals("end")) 

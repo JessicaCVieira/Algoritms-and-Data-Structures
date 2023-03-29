@@ -3,6 +3,8 @@ package Semana05;
 import java.util.Iterator;
 import java.util.Scanner;
 
+//eficiencia espacial: Linear
+
 public class List<Item> implements Iterable<Item>{
     
     private Node first, last;
@@ -21,6 +23,7 @@ public class List<Item> implements Iterable<Item>{
     }			
 
     //Add item to the list
+    //eficiencia temporal: Constante
     public void add(Item item) {
 
         Node node = new Node(); 
@@ -36,6 +39,7 @@ public class List<Item> implements Iterable<Item>{
     }
 
     //Remove first occurence
+    //eficiencia temporal: Constante
     public boolean removeFirst(Item item){
         if(isEmpty()) return false; 
 
@@ -58,6 +62,7 @@ public class List<Item> implements Iterable<Item>{
     }
 
     //Remove last occurrence
+    //eficiencia temporal: Linear
     public boolean removeLast(Item item) {
         if (isEmpty()) return false;
     
@@ -87,6 +92,7 @@ public class List<Item> implements Iterable<Item>{
     }
     
     //Remove all items
+    //eficiencia temporal: Linear
     public boolean removeAll(Item item){
         boolean removido = false;
         while (removeFirst(item)) {
@@ -95,10 +101,12 @@ public class List<Item> implements Iterable<Item>{
         return removido;
     } 	
     
+    //eficiencia temporal: Constante
     public boolean isEmpty() {
         return s==0; 
     }	
 
+    //eficiencia temporal: Linear (percorre todos os nodes)
     public boolean contains(Item item){
         Iterator<Item> it = iterator(); 
         while(it.hasNext()){
@@ -110,10 +118,12 @@ public class List<Item> implements Iterable<Item>{
         return false; 
     } 	
 
+    //eficiencia temporal: Constante
     public int size() {
         return s; 
     }		
 
+    //eficiencia temporal: Linear
     public Iterator<Item> iterator(){
         return new ListIterator(); 
     }	
@@ -181,6 +191,7 @@ public class List<Item> implements Iterable<Item>{
         for(String item : list)
             System.out.print(item + " "); 
         System.out.println(); 
+        sc.close(); 
 
     }
 }
