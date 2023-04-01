@@ -26,7 +26,7 @@ public class Insertion {
         System.out.println("N\t\tT(N) (s)\t\tRatio\t\tLog(Ratio)");
 
         //Definir o tamanho do array
-        for(int n = 1000; n <= 512000; n*= 2){
+        for(int n = 1000; n <= 32768000; n*= 2){
             String[] array = new String[n]; 
 
             double start = System.currentTimeMillis();
