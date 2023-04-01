@@ -26,46 +26,39 @@ public class InsertionUpdated {
         return t.compareTo(e) < 0;
     }
 
-    public static void main(String[] args) {
-        // Definir o tamanho do array
-        int n = 10;
-        String[] array = new String[n];
-        // inserir valores aleatórios no array
-        // se for inteiro
-        for (int i = 0; i < array.length; i++) {
-            array[i] = "" + (int) (Math.random() * n); // vetor de strings que tem numeros lá dentro
-        }
-        // imprimir o array
-        System.out.println("Array antes:");
-        for (int i = 0; i < array.length; i++) {
-            System.out.print(array[i] + " ");
-        }
-        System.out.println();
+    public static void main(String[] args){
 
-        // tempo de execução inicial
-        double start = System.currentTimeMillis();
-        // ordenar o array
-        sort(array);
-        // tempo de execução final
-        double end = System.currentTimeMillis();
-
-        // imprimir o array ordenado
-        System.out.println("Array depois:");
-        for (int i = 0; i < array.length; i++) {
-            System.out.print(array[i] + " ");
-        }
-        System.out.println();
-
-        // Doubling Hypothesis
-        System.out.println("Doubling Hipothesis:");
-        double prevTime = 0.0; 
+        double previousTime = 0.0; 
         double ratio = 0.0; 
-        double log = 0.0; 
+        double log = 0.0;
 
+        //header
+        System.out.println("---------Insertion Updated---------");
         System.out.println("N\t\tT(N) (s)\t\tRatio\t\tLog(Ratio)");
 
-        //for (int i = ; i < ; i)
+        //Definir o tamanho do array
+        for(int n = 1000; n <= 512000; n*= 2){
+            String[] array = new String[n]; 
 
+            double start = System.currentTimeMillis();
 
+            for(int i = 0; i < array.length; i++){
+                array[i] = "" + (int)(Math.random()*n);     
+            }
+
+            double end = System.currentTimeMillis(); 
+
+            sort(array); 
+
+            double time = (end-start)/1000.0; 
+            
+            if(previousTime!=0){
+                ratio = Math.round((time / previousTime)*1000.0)/1000.0; 
+                log = Math.round((Math.log10(ratio) / Math.log10(2))*1000.0)/1000.0 ;
+            } 
+            System.out.println(n + "\t\t" + time + "\t\t" + ratio + "\t\t" + log); 
+            previousTime = time;
+
+        }
     }
 }

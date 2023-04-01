@@ -16,18 +16,30 @@ public class QuicksortUpdated {
     //versão recursiva
     private static void sort (Comparable[] array, int lo, int hi){
         //parar com o array menor que 10, invocar insertion sort para ordenar o subarray
-        if(hi<=lo + 9){      //paragem da recursão , só para a parte lo e hi temos que mudar o insertion sort de **lo até hi**
-            Insertion(array, lo, hi); 
+        if(hi<=lo + 10){      //paragem da recursão , só para a parte lo e hi temos que mudar o insertion sort de **lo até hi**
+            Insertion.sort(array, lo, hi); 
             return; 
         }
+
+        int mediana = medianaOf((int) array[0], (int) array[1], (int) array[2]);
+        
+
         int j = partition(array, lo, hi); 
         sort(array, lo, j-1);
         sort(array, j+1, hi); 
     }
 
-    public class Insertion {
-        public static <T extends Comparable<T>>void sort(T[] array){
-            for(int i = 0; i < array.length; i++){
+    private static int medianaOf(int a, int b, int c){
+        Comparable[] vetor = {a, b, c};
+        sort(vetor);
+        int mediana1 = (int) vetor[1];
+        return mediana1; 
+    }
+
+    public static class Insertion {
+        //TODO -> alterar insertion para receber, array, lo, hi; 
+        public static <T extends Comparable<T>>void sort(T[] array, int lo, int hi){
+            for(int i = 0; i < hi+1; i++){
                 for(int j = i; j > 0; j--){
                     if(array[j].compareTo(array[j-1]) < 0) { //comparação
                         //trocar sem usar o exchange (o que é pedido no ex)
@@ -40,6 +52,7 @@ public class QuicksortUpdated {
                 }
             }
         }
+    }
 
     private static int partition(Comparable[] array, int lo, int hi){
         //partição => array[lo]
@@ -73,7 +86,7 @@ public class QuicksortUpdated {
         return a.compareTo(b) < 0; 
     }
 
-    private static void shuffle(Comparable[] array){
+    private static void shuffle (Comparable[] array){
         for(int i = 0; i < array.length; i++){
             int pos = (int) (Math.random()*(i+1)); 
             exchange(array, i, pos);
