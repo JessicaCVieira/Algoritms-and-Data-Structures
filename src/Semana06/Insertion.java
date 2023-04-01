@@ -29,15 +29,15 @@ public class Insertion {
         for(int n = 1000; n <= 32768000; n*= 2){
             String[] array = new String[n]; 
 
-            double start = System.currentTimeMillis();
-
             for(int i = 0; i < array.length; i++){
                 array[i] = "" + (int)(Math.random()*n);     
             }
 
-            double end = System.currentTimeMillis(); 
+            double start = System.currentTimeMillis();
 
             sort(array); 
+
+            double end = System.currentTimeMillis(); 
 
             double time = (end-start)/1000.0; 
             
