@@ -1,6 +1,4 @@
-package Semana07;
-
-import Semana06.Insertion;
+package Semana07; 
 
 //do while (primeiro faz a ação depois incrementa)
 //para parar uma função recursiva fazemos return (é preciso de haver uma condição de retorno)
@@ -15,14 +13,14 @@ public class QuicksortUpdated {
 
     //versão recursiva
     private static void sort (Comparable[] array, int lo, int hi){
-        //parar com o array menor que 10, invocar insertion sort para ordenar o subarray
-        if(hi<=lo + 10){      //paragem da recursão , só para a parte lo e hi temos que mudar o insertion sort de **lo até hi**
+        
+        if(hi<=lo + 10){     
             Insertion.sort(array, lo, hi); 
             return; 
         }
 
         int mediana = medianaOf((int) array[0], (int) array[1], (int) array[2]);
-        
+        lo = mediana; 
 
         int j = partition(array, lo, hi); 
         sort(array, lo, j-1);
@@ -37,12 +35,11 @@ public class QuicksortUpdated {
     }
 
     public static class Insertion {
-        //TODO -> alterar insertion para receber, array, lo, hi; 
+         
         public static <T extends Comparable<T>>void sort(T[] array, int lo, int hi){
             for(int i = 0; i < hi+1; i++){
                 for(int j = i; j > 0; j--){
-                    if(array[j].compareTo(array[j-1]) < 0) { //comparação
-                        //trocar sem usar o exchange (o que é pedido no ex)
+                    if(array[j].compareTo(array[j-1]) < 0) {                         
                         T aux = array[j]; 
                         array[j] = array[j - 1]; 
                         array[j - 1] = aux; 
@@ -55,8 +52,7 @@ public class QuicksortUpdated {
     }
 
     private static int partition(Comparable[] array, int lo, int hi){
-        //partição => array[lo]
-        //TODO -> encontrar a mediana estimanad no lugar a[lo] - é preciso criar uma função extra
+
         int i = lo;
         int j = hi + 1; //pq decrementamos antes de testar
 
@@ -114,10 +110,10 @@ public class QuicksortUpdated {
         System.out.println();
     }   
 
-        //o main é igual ao da semana passada 
+        
     public static void main(String[] args){
         //criar um array
-        Integer[] array = randomIntAray(20); 
+        Integer[] array = randomIntAray(30); 
         //imprimir o array; 
         printArray(array);
         //ordenar o array

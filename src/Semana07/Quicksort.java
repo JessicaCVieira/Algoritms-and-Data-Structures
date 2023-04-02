@@ -1,4 +1,3 @@
-package Semana07;
 
 public class Quicksort {
       

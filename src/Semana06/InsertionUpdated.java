@@ -1,8 +1,3 @@
-package Semana06;
-
-//3 linhas de mudança de código
-//interface usado para não repetir codigo
-//n muda a ordem de grandeza mas o tempo é menor. tendem as duas para o n^2
 
 public class InsertionUpdated {
     public static <T extends Comparable<T>> void sort(T[] array) {
@@ -21,7 +16,6 @@ public class InsertionUpdated {
         }
     }
 
-    //TODO-> arranjar o warning do comparable 
     private static boolean less(Comparable t, Comparable e) {
         return t.compareTo(e) < 0;
     }
@@ -47,7 +41,7 @@ public class InsertionUpdated {
             double start = System.currentTimeMillis();
 
             sort(array); 
-            
+
             double end = System.currentTimeMillis();
 
             double time = (end-start)/1000.0; 

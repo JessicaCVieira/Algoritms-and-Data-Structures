@@ -1,4 +1,3 @@
-package Semana06;
 
 public class Insertion {
     public static <T extends Comparable<T>>void sort(T[] array){
