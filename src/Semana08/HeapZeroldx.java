@@ -27,13 +27,13 @@ public class HeapZeroldx{
 
     private static void sink(Comparable[] a, int i, int N){
         //2 critérios de paragem: cheguei numa folha, quando for >= ao maior dos seus filhos 
-        //filhos: 2*i e 2*i+1
+        //filhos: 2*i+1 e 2*i+2
         while(2*i+1 <= N){
             //verificar quem é o maior dos filhos 
             int j = 2*i + 2; //estamos a considerar que o filho da esquerda é o maior
 
             //Compara com o filho da direita
-            if( j+1 <= N && less(a, j, j+1)){
+            if( j+2 <= N && less(a, j, j+1)){
                 j++; 
 
                 //só trocamos se o filho for maior que o pai / se ou pai for menor que o filho troca

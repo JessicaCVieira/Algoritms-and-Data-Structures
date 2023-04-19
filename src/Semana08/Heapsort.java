@@ -7,7 +7,7 @@ public class Heapsort {
         int N = a.length - 1; 
 
         //Heapify
-        for(int i = N/2; i <= 1; i--){
+        for(int i = N/2; i >= 1; i--){
             sink(a, i, N); 
         }
 
@@ -32,6 +32,7 @@ public class Heapsort {
 
             //Compara com o filho da direita
             if( j+1 <= N && less(a, j, j+1)){
+                
                 j++; 
 
                 //só trocamos se o filho for maior que o pai / se ou pai for menor que o filho troca
