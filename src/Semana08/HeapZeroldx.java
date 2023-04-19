@@ -2,10 +2,11 @@ package Semana08;
 
 
 //ORDENAR DE A[0 ..... A.LENGHT-1]
+//2*i+1      2*i+2
 public class HeapZeroldx{
     //ordenar o a[1.....a.length - 1]; 
     public static void sort(Comparable[] a){
-        int N = a.length - 1; 
+        int N = a.length; 
 
         //Heapify
         for(int i = N/2; i <= 1; i--){
@@ -29,7 +30,7 @@ public class HeapZeroldx{
         //filhos: 2*i e 2*i+1
         while(2*i+1 <= N){
             //verificar quem é o maior dos filhos 
-            int j = 2*i; //estamos a considerar que o filho da esquerda é o maior
+            int j = 2*i + 2; //estamos a considerar que o filho da esquerda é o maior
 
             //Compara com o filho da direita
             if( j+1 <= N && less(a, j, j+1)){
