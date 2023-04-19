@@ -1,8 +1,7 @@
 package Semana08;
 
-
-//ORDENAR DE A[0 ..... A.LENGHT-1]
-public class HeapZeroldx{
+public class Heapsort {
+    
     //ordenar o a[1.....a.length - 1]; 
     public static void sort(Comparable[] a){
         int N = a.length - 1; 
@@ -27,7 +26,7 @@ public class HeapZeroldx{
     private static void sink(Comparable[] a, int i, int N){
         //2 critérios de paragem: cheguei numa folha, quando for >= ao maior dos seus filhos 
         //filhos: 2*i e 2*i+1
-        while(2*i+1 <= N){
+        while(2*i <= N){
             //verificar quem é o maior dos filhos 
             int j = 2*i; //estamos a considerar que o filho da esquerda é o maior
 
@@ -85,4 +84,6 @@ public class HeapZeroldx{
         System.out.println("Array depois: ");
         printArray(array);
     }
+
+
 }
