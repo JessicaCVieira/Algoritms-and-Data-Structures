@@ -1,4 +1,3 @@
-package Semana01;
 
 import java.util.Scanner;
 
@@ -19,7 +18,7 @@ public class Date {
 	} 
 	
 	//funções auxiliares ao construtor
-	private boolean validDate(int month, int day, int year) {
+	public boolean validDate(int month, int day, int year) {
 
 		if(year < 0)
 			return false; 
@@ -30,7 +29,7 @@ public class Date {
 		return true; 
 	}
 	
-	private int daysInMonth(int month, int year) {
+	public int daysInMonth(int month, int year) {
 
 		int daysInMonth= 0; 
 		if (month == 2){
@@ -50,7 +49,7 @@ public class Date {
 		return daysInMonth;
 	} 
 
-	private boolean isBissexto (int year){
+	public boolean isBissexto (int year){
 
 		if(div(year, 400)){
 			return true; 
@@ -61,7 +60,7 @@ public class Date {
 		}
 	}
 
-	private boolean div (int year, int n){
+	public boolean div (int year, int n){
 
 		if((year % n) == 0){
 			return true; 
@@ -91,7 +90,7 @@ public class Date {
 
 	//Ex: 2
 	//Metodos
-	private boolean before(Date d){
+	public boolean before(Date d){
 
 		Date date = new Date (month, day, year);
 		if(d.getYear() < date.getYear()){
@@ -116,7 +115,7 @@ public class Date {
 		}
 	}
 
-	private int daystoEndYear(){
+	public int daystoEndYear(){
 	
 		Date date = new Date(month, day, year);
 		Date d = new Date (12,31,year);
@@ -132,7 +131,7 @@ public class Date {
 		return days; 
 	}
 
-	private int dayssinceBeginYear(){
+	public int dayssinceBeginYear(){
 		
 		Date date = new Date(month, day, year);
 		Date d = new Date (1,1,year);
@@ -149,7 +148,7 @@ public class Date {
 	}
 
 
-	private int daysBetween(Date d){
+	public int daysBetween(Date d){
 
 		Date date = new Date (month, day, year);
 		int daysBetween = 0; 
@@ -171,7 +170,7 @@ public class Date {
 	}
 
 	//Aux
-	private int daysSameMonth (Date date, Date d){
+	public int daysSameMonth (Date date, Date d){
 		int countDay = 0; 
 		if(d.getDay() > date.getDay()){
 			countDay = d.getDay() - date.getDay();
@@ -181,7 +180,7 @@ public class Date {
 		return countDay; 
 	}
 
-	private int daysDifMonth (Date date, Date d, int year){
+	public int daysDifMonth (Date date, Date d, int year){
 
 		int daysMonth = 0; 
 		if(date.getMonth() < d.getMonth()){
@@ -206,7 +205,7 @@ public class Date {
 		return daysMonth; 
 	}
 
-	private int daysDifYear (Date date, Date d){
+	public int daysDifYear (Date date, Date d){
 
 		int daysBetweenYear1 = 0; 
 		if(date.getYear() > d.getYear()){
@@ -230,7 +229,7 @@ public class Date {
 		return daysBetweenYear1; 
 	}
 
-	private int daysInYear(int year){
+	public int daysInYear(int year){
 
 		int daysInYear = 0; 
 		if(isBissexto(year)){

@@ -2,9 +2,10 @@ package Semana08;
 //entregar dia 7 de maio
 public class Heapsort {
     
+
     //ordenar o a[1.....a.length - 1]; 
     public static void sort(Comparable[] a){
-        int N = a.length - 1; 
+        int N = a.length; //- 1; 
 
         //Heapify
         for(int i = N/2; i >= 1; i--){

@@ -1,49 +1,43 @@
-package Semana08;
+//package Semana08;
 
-
-//ORDENAR DE A[0 ..... A.LENGHT-1]
-//2*i+1      2*i+2
-public class HeapZeroldx{
+public class HeapZeroIdx{
     //ordenar o a[1.....a.length - 1]; 
     public static void sort(Comparable[] a){
         int N = a.length; 
 
         //Heapify
-        for(int i = N/2; i <= 1; i--){
+        for(int i = N/2; i >= 1; i--){
             sink(a, i, N); 
         }
 
         //Sortdown
-        while(N > 1){
+        int n = N; 
+        while(n > 1){
             //Trocar a pos 1 (Máx) com a pos N 
-            exchange(a, 1, N); //ou  exchange(a, 1, N--);
-            //decrementar N
-            N--; 
+            exchange(a, 1, n--); 
             //Sink de 1(que é a raiz)
-            sink(a, 1, N); 
+            sink(a, 1, n); 
         }
 
     }
 
     private static void sink(Comparable[] a, int i, int N){
         //2 critérios de paragem: cheguei numa folha, quando for >= ao maior dos seus filhos 
-        //filhos: 2*i+1 e 2*i+2
-        while(2*i+1 <= N){
+        while(2*i <= N){
             //verificar quem é o maior dos filhos 
-            int j = 2*i + 2; //estamos a considerar que o filho da esquerda é o maior
+            int j = 2*i; //estamos a considerar que o filho da esquerda é o maior
 
             //Compara com o filho da direita
-            if( j+2 <= N && less(a, j, j+1)){
+            if( j < N && less(a, j, j+1)){
                 j++; 
-
-                //só trocamos se o filho for maior que o pai / se ou pai for menor que o filho troca
-                if(less(a, i, j)){
-                    exchange(a, i, j);
-                }else{
-                    break; 
-                }
-                i = j; //para descer na arvore
             }
+            //só trocamos se o filho for maior que o pai / se ou pai for menor que o filho troca
+            if(less(a, i, j)){
+                exchange(a, i, j);
+            }else{
+                break; 
+            }
+            i = j; //para descer na arvore
             //quando sair o j é o indice do maior dos filhos
 
         } 
@@ -51,13 +45,13 @@ public class HeapZeroldx{
     }
 
     private static boolean less(Comparable[] a, int i, int j){
-        return a[i].compareTo(a[j]) < 0; 
+        return a[i-1].compareTo(a[j-1]) < 0; 
     }
 
-    public static void exchange(Comparable[] array, int i, int j){
-        Comparable aux = array[j]; 
-        array[j] = array[i]; 
-        array[i] = aux; 
+    public static void exchange(Object[] a, int i, int j){
+        Object aux = a[i - 1]; 
+        a[i - 1] = a[j - 1]; 
+        a[j - 1 ] = aux; 
     }
 
     public static Integer[] randomIntAray(int n){
@@ -77,7 +71,7 @@ public class HeapZeroldx{
 
     public static void main(String[] args){
         //criar um array
-        Integer[] array = randomIntAray(3); 
+        Integer[] array = randomIntAray(5); 
         //imprimir o array; 
         printArray(array);
         //ordenar o array
