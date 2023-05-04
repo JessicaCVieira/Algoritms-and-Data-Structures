@@ -90,6 +90,8 @@ public class QueueLast<T> {
         //Remove a b c 
         //Add e f g 
 
+        
+
         QueueLast<String> q = new QueueLast<>(); 
         q.enqueue("a");
         q.enqueue("b");
@@ -109,7 +111,6 @@ public class QueueLast<T> {
         q.enqueue("g");
 
         System.out.println(q);
-
     }
 
 }
