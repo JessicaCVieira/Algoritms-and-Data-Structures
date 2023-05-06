@@ -134,6 +134,12 @@ public class Deque<Item> {
 
         System.out.println(q);
 
+        //testar q.left(); 
+        System.out.println(q.left());
+
+        //testar q.right(); 
+        System.out.println(q.right());
+
     }
     
 }

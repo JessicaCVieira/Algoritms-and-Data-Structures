@@ -111,6 +111,7 @@ public class QueueLast<T> {
         q.enqueue("g");
 
         System.out.println(q);
+        
     }
 
 }
