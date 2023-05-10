@@ -1,4 +1,4 @@
-//package Semana08;
+package Semana08;
 
 public class HeapZeroIdx{
     //ordenar o a[1.....a.length - 1]; 

@@ -77,7 +77,7 @@ public class Heapsort {
 
     public static void main(String[] args){
         //criar um array
-        Integer[] array = randomIntAray(3); 
+        Integer[] array = randomIntAray(10); 
         //imprimir o array; 
         printArray(array);
         //ordenar o array
