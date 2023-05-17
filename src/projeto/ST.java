@@ -1,3 +1,4 @@
+package projeto;
 //esta semana min max put get
 
 import java.util.Iterator;
@@ -44,6 +45,8 @@ public class ST<Key extends Comparable<Key>, Value> {
         else 
             x.right = put(x.right, key, val); 
 
+        //x.size =
+
         return x; 
     }
 
@@ -83,10 +86,32 @@ public class ST<Key extends Comparable<Key>, Value> {
 
 
     // Remove the pair that has this key
-    // public void delete(Key key){
+    public void delete(Key key){
+        root = delete(root, key); 
+    }
 
-    // }
+    //está como o da prof rever o erro 
+    private Node delete(Node x, Key key){
+        if (x == null) return null; 
+        int comp = key.compareTo(x.key); 
+        if(comp < 0)
+            x.left = delete(x.left, key); 
+        else if (comp > 0)
+            x.right = delete(x.right, key); 
+        else{
+            //tem 2 filhos
+            if (x.right == null) return x.left; 
+            if(x.left == null) return x.right; 
+            Node temp = x; 
+            x = min(temp.right); 
+            x.right = deleteMin(temp.right); 
+            x.left = temp.left; 
+        }
 
+        //x.size = 
+        return x; 
+
+    }
     // Is there a value paired with the key?
     // public boolean contains(Key key) {
 
@@ -98,12 +123,15 @@ public class ST<Key extends Comparable<Key>, Value> {
     }
 
     // Number of key-value pairs in this table
-    // public int size(){
+    public int size(){
+        return size(root); 
+    }
 
-    // }
-
-    // Smallest key
-    //tem de ser feito recursivo 
+    private int size(Node x){
+        if(x == null) return 0; 
+        else return x.size; 
+    }
+    // Smallest key 
     public Key min(){
         if(root == null)
             throw new NoSuchElementException("A árvore está vazia"); 
@@ -137,14 +165,50 @@ public class ST<Key extends Comparable<Key>, Value> {
     }
 
     // Largest key less than or equal to key
-    // public Key floor(Key key) {
+    public Key floor(Key key) {
+        return floor(root, key); 
+    }
 
-    // }
+    private Key floor (Node x, Key key){
+        if(x == null) return null; 
+        int comp = key.compareTo(x.key); 
+        if(comp < 0){
+            return floor(x.left, key); 
+        }else if( comp == 0){
+            return x.key; 
+        //comp > 0
+        }else{
+            Key aux = floor (x.right, key); 
+            if(aux == null){
+                return x.key; 
+            }else{
+                return aux; 
+            }
+        }
+    }
 
     // Smallest key greater than or equal to key
-    // public Key ceiling(Key key) {
+    public Key ceiling(Key key) {
+        return ceiling(root, key); 
+    }
 
-    // }
+    private Key ceiling(Node x, Key key){
+        if(x == null) return null; 
+        int comp = key.compareTo(x.key); 
+        if(comp > 0){
+            return floor(x.left, key); 
+        }else if( comp == 0){
+            return x.key; 
+        //comp < 0
+        }else{
+            Key aux = floor (x.left, key); 
+            if(aux == null){
+                return x.key; 
+            }else{
+                return aux; 
+            }
+        }
+    }
 
     // Number of keys less than key
     // public int rank(Key key) {
@@ -157,14 +221,23 @@ public class ST<Key extends Comparable<Key>, Value> {
     // }
 
     // Delete the pair with the smallest key
-    // public void deleteMin() {
+    //tem de ser feito recursivo
+    public void deleteMin() {
+        if(isEmpty()) throw new NoSuchElementException("A árvore está vazia");
+        root = deleteMin(root); 
+        Queue queue = new Queue();  
+    }
 
-    // }
+    private deleteMin(){
+        if()
+    }
 
     // Delete the pair with the largest key
-    // public void deleteMax(){
-
-    // }
+    //pode ser feito sem recursivo
+    public void deleteMax(){
+        if(isEmpty()) throw new NoSuchElementException("A árvore está vazia"); 
+        else return delete(ST.max());
+    }
 
     // Number of keys in [lo, hi]
     // public int size(Key lo, Key hi) {
@@ -173,6 +246,8 @@ public class ST<Key extends Comparable<Key>, Value> {
 
     // Keys in [lo, hi] in sorted order
     // public Iterable<Key> keys(Key lo, Key hi) {
+
+        //implementar as keys do lab 4 ou a lista do lab 5
 
     // }
 
@@ -198,12 +273,28 @@ public class ST<Key extends Comparable<Key>, Value> {
     public static void main(String[] args){
         ST<String, Integer> st = new ST<String, Integer>();
 
-        st.put("a", 1); 
-        st.put("b", 2); 
-        st.put("c", 3); 
+        st.put("s", 1); 
+        st.put("e", 2); 
+        st.put("x", 3); 
+        st.put("a", 4); 
+        st.put("r", 5); 
+        st.put("c", 6);
+        st.put("h", 7); 
+        st.put("m", 8); 
+    
         
+        System.out.print("Min:"); 
         System.out.println(st.min()); 
+        System.out.print("Max:"); 
         System.out.println(st.max());
+        System.out.print("Floor:"); 
+        System.out.println(st.floor("g")); 
+        System.out.print("Ceiling:"); 
+        System.out.println(st.ceiling("q"));
+        System.out.print("Rank:"); 
+        System.out.print("size:"); 
+        System.out.println(st.size());
+        
     }
 
 }
