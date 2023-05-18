@@ -15,8 +15,8 @@ public class ST<Key extends Comparable<Key>, Value> {
         Node left, right; 
         int size; 
 
-        Node(Key k, Value v){
-            key = k; 
+        Node(Key key, Value v){
+            key = key; 
             val = v; 
         }
     }
@@ -24,7 +24,7 @@ public class ST<Key extends Comparable<Key>, Value> {
 
     // Initialise an empty ordered symbol table
     public ST(){
-        //root = null -> rever 
+        root = null; 
     }
 
     // Put the key-value pair into this table
@@ -71,16 +71,16 @@ public class ST<Key extends Comparable<Key>, Value> {
         return get(root, key); 
     }
 
-    private Value get(Node x, Key k){
+    private Value get(Node x, Key key){
         //critério de paragem (n nos podemos esquecer de para a recursão)
         if(x == null) return null; 
         //caso recursivo -> avançar pela árvore
-        int cmp = k.compareTo(x.key);
+        int cmp = key.compareTo(x.key);
         if(cmp == 0) return x.val;
         else if(cmp < 0) 
-            return get(x.left, k);  
+            return get(x.left, key);  
         else 
-            return get(x.right, k); 
+            return get(x.right, key); 
 
     }
 
@@ -215,8 +215,8 @@ public class ST<Key extends Comparable<Key>, Value> {
 
     // }
 
-    // Get a key of rank k
-    // public Key select(int k) {
+    // Get a key of rank key
+    // public Key select(int key) {
 
     // }
 
@@ -225,7 +225,7 @@ public class ST<Key extends Comparable<Key>, Value> {
     public void deleteMin() {
         if(isEmpty()) throw new NoSuchElementException("A árvore está vazia");
         root = deleteMin(root); 
-        Queue queue = new Queue();  
+         
     }
 
     private deleteMin(){
@@ -236,7 +236,7 @@ public class ST<Key extends Comparable<Key>, Value> {
     //pode ser feito sem recursivo
     public void deleteMax(){
         if(isEmpty()) throw new NoSuchElementException("A árvore está vazia"); 
-        else return delete(ST.max());
+        else return delete(max());
     }
 
     // Number of keys in [lo, hi]
@@ -248,26 +248,45 @@ public class ST<Key extends Comparable<Key>, Value> {
     // public Iterable<Key> keys(Key lo, Key hi) {
 
         //implementar as keys do lab 4 ou a lista do lab 5
+        //criar a queue aqui!
 
     // }
+
+    //private da anterior
+    //recebe -> lo hi node
 
     // All keys in the table, in sorted order
-    // public Iterable<Key> keys() {
+    public Iterable<Key> keys() {
+        
+    }
 
-    // }
+    //para vizualizar a arvore
+    //print all (key, val) in the tree in ascending order
+    public String toString(){
+        return toString(root); 
+    }
+
+    private String toString(Node x){
+        //stop criteria
+        if( x == null) return ""; 
+        //recursive
+        return toString(x.left) + " (" + x.key + " , " + x.val + ") " + toString(x.right);  
+    }
+
 
     //testar
-    // public static void main(String[] args) { 
-    //     //output:
-    //     ST<String, Integer> st = new ST<String, Integer>();
-    //     Scanner sc = new Scanner(System.in);
-    //     for (int i = 0; sc.hasNext(); i++) {
-    //         String key = sc.next();
-    //         st.put(key, i);
-    //     }
-    //     for (String s : st.keys())
-    //         System.out.println(s + " " + st.get(s));
-    //     }
+    public static void main1(String[] args) { 
+        //output:
+        ST<String, Integer> st = new ST<String, Integer>();
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt(); 
+        for (int i = 0; i < n; i++) {
+            String key = sc.next();
+            st.put(key, i);
+        }
+        for (String s : st.keys())
+            System.out.println(s + " " + st.get(s));
+        }
 
     //testar semana 10
     public static void main(String[] args){
@@ -281,16 +300,24 @@ public class ST<Key extends Comparable<Key>, Value> {
         st.put("c", 6);
         st.put("h", 7); 
         st.put("m", 8); 
+
+        System.out.println(st.toString()); 
     
-        
+        //Min e max: 
         System.out.print("Min:"); 
         System.out.println(st.min()); 
         System.out.print("Max:"); 
         System.out.println(st.max());
+
+        //testar floor para casos que não existem
         System.out.print("Floor:"); 
         System.out.println(st.floor("g")); 
+
+        //testar floor para casos que não existem
         System.out.print("Ceiling:"); 
         System.out.println(st.ceiling("q"));
+
+
         System.out.print("Rank:"); 
         System.out.print("size:"); 
         System.out.println(st.size());
