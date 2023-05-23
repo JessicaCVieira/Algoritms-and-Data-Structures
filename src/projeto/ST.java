@@ -15,9 +15,10 @@ public class ST<Key extends Comparable<Key>, Value> {
         Node left, right; 
         int size; 
 
-        Node(Key key, Value v){
-            key = key; 
+        Node(Key k, Value v, int s){
+            key = k; 
             val = v; 
+            size = s; 
         }
     }
 
@@ -34,7 +35,7 @@ public class ST<Key extends Comparable<Key>, Value> {
 
     private Node put(Node x, Key key, Value val){
         if(x == null)
-            return new Node(key, val); 
+            return new Node(key, val, 1); 
 
         int cmp = key.compareTo(x.key);
 
@@ -45,7 +46,7 @@ public class ST<Key extends Comparable<Key>, Value> {
         else 
             x.right = put(x.right, key, val); 
 
-        //x.size =
+        x.size = 1 + size(x.left) + size(x.right); 
 
         return x; 
     }
@@ -87,6 +88,7 @@ public class ST<Key extends Comparable<Key>, Value> {
 
     // Remove the pair that has this key
     public void delete(Key key){
+        if(key == null) throw new IllegalArgumentException("key cannot be null!");
         root = delete(root, key); 
     }
 
@@ -102,20 +104,23 @@ public class ST<Key extends Comparable<Key>, Value> {
             //tem 2 filhos
             if (x.right == null) return x.left; 
             if(x.left == null) return x.right; 
-            Node temp = x; 
-            x = min(temp.right); 
-            x.right = deleteMin(temp.right); 
-            x.left = temp.left; 
+            
+            Node temp = x;
+            x = min(temp.right);
+            x.right = deleteMin(temp.right);
+            x.left = temp.left;
         }
 
-        //x.size = 
+        x.size = size(x.left) + size(x.right) + 1;
         return x; 
 
     }
-    // Is there a value paired with the key?
-    // public boolean contains(Key key) {
 
-    // }
+    // Is there a value paired with the key?
+    public boolean contains(Key key) {
+        if(key == null) throw new IllegalArgumentException("key cannot be null!");
+        return get(key) != null; 
+    }
 
     // Is this symbol table empty?
     public boolean isEmpty(){
@@ -136,13 +141,13 @@ public class ST<Key extends Comparable<Key>, Value> {
         if(root == null)
             throw new NoSuchElementException("A árvore está vazia"); 
         else
-            return min(root);  
+            return min(root).key;  
     }
 
-    private Key min(Node x){
+    private Node min(Node x){
         //avança para a esquerda até x.left == null;
         if(x.left == null) 
-            return x.key; 
+            return x; 
         else    
             return min(x.left); 
     }
@@ -211,53 +216,94 @@ public class ST<Key extends Comparable<Key>, Value> {
     }
 
     // Number of keys less than key
-    // public int rank(Key key) {
+    public int rank(Key key) {
+        if(key == null) throw new IllegalArgumentException("Key cannot be null"); 
+        return rank(key, root); 
+    }
 
-    // }
+    private int rank (Key key, Node x){
+        if (x == null) return 0; 
+        int comp =  key.compareTo(x.key);
+        if (comp > 0)  return 1 + size(x.left) + rank(key, x.right);
+        else if (comp < 0) return rank(key, x.left);
+        else return size(x.left);
+    }
 
     // Get a key of rank key
-    // public Key select(int key) {
+    public Key select(int k) {
+        if(k < 0 || k >= size()) throw new IllegalArgumentException("k cannot be null");
+        return select(root, k); 
+    }
 
-    // }
+    private Key select (Node x, int k){
+        if(x == null) return null; 
+        int sizeL = size(x.left); 
+        if (sizeL < k) return select(x.right, k -sizeL -1); 
+        else if (sizeL > k) return select(x.right, k); 
+        else return x.key; 
+    }
 
     // Delete the pair with the smallest key
     //tem de ser feito recursivo
     public void deleteMin() {
         if(isEmpty()) throw new NoSuchElementException("A árvore está vazia");
-        root = deleteMin(root); 
-         
+        root = deleteMin(root);  
     }
 
-    private deleteMin(){
-        if()
+    private Node deleteMin(Node x){
+        if(x.left == null) return x.right; 
+        x.left = deleteMin(x.left);
+        x.size = size(x.left) + size(x.right) + 1; 
+        return x;
     }
 
     // Delete the pair with the largest key
     //pode ser feito sem recursivo
     public void deleteMax(){
         if(isEmpty()) throw new NoSuchElementException("A árvore está vazia"); 
-        else return delete(max());
+        root = deleteMax(root);
+    }
+
+    private Node deleteMax (Node x){
+        if (x.right == null) return x.left; 
+        x.right = deleteMax(x.right);
+        x.size = size(x.left) + size(x.right) + 1;
+        return x;
     }
 
     // Number of keys in [lo, hi]
-    // public int size(Key lo, Key hi) {
+    public int size(Key lo, Key hi) {
+        if (lo == null) throw new IllegalArgumentException("Lo cannot be null");
+        if (hi == null) throw new IllegalArgumentException("Hi cannot be null");
 
-    // }
+        if (contains(hi)) return rank(hi) - rank(lo) + 1;
+        if (lo.compareTo(hi) > 0) return 0;
+        else return rank(hi) - rank(lo);
+    }
 
-    // Keys in [lo, hi] in sorted order
-    // public Iterable<Key> keys(Key lo, Key hi) {
+    //Keys in [lo, hi] in sorted order
+    public Iterable<Key> keys(Key lo, Key hi) {
 
-        //implementar as keys do lab 4 ou a lista do lab 5
-        //criar a queue aqui!
+        if (lo == null) throw new IllegalArgumentException("Low cannot be null!"); 
+        if (hi == null) throw new IllegalArgumentException("Low cannot be null!");
+        
+        Queue<Key> queue = new Queue<Key>(); 
+        keys(root, queue, lo, hi); 
+        return queue; 
+    }
 
-    // }
-
-    //private da anterior
-    //recebe -> lo hi node
+    private void keys(Node x, Queue<Key> queue, Key lo, Key hi){
+        if (x == null) return; 
+        int compLow = lo.compareTo(x.key); 
+        int compHi = hi.compareTo(x.key); 
+        if(compLow < 0) keys(x.left, queue, lo, hi); 
+        if(compLow <= 0 && compHi >= 0) queue.enqueue(x.key);
+        if(compHi > 0) keys(x.right, queue, lo, hi); 
+    }
 
     // All keys in the table, in sorted order
     public Iterable<Key> keys() {
-        
+        return keys(min(), max()); 
     }
 
     //para vizualizar a arvore
@@ -303,24 +349,77 @@ public class ST<Key extends Comparable<Key>, Value> {
 
         System.out.println(st.toString()); 
     
+        //get
+        //se existir
+        System.out.print("Get:"); 
+        System.out.println(st.get("a")); 
+        //tem de dar 4
+        //se não existir 
+        System.out.print("Get:"); 
+        System.out.println(st.get("z"));
+
+        //delete
+        System.out.print("antes:");
+        System.out.println(st.toString()); 
+        st.delete("m");  
+        System.out.print("depois:"); 
+        System.out.println(st.toString()); 
+
+        //contains
+        //se existir 
+        System.out.print("Contains:"); 
+        System.out.println(st.contains("a"));
+        //se não existir 
+        System.out.print("Contains:"); 
+        System.out.println(st.contains("z"));
+
+        //isEmpty
+        System.out.print("isEmpty:"); 
+        System.out.println(st.isEmpty());
+
+        //size -> está errado (era suposto dar 7 deu 5)
+        System.out.print("size:"); 
+        System.out.println(st.size());
+
         //Min e max: 
         System.out.print("Min:"); 
         System.out.println(st.min()); 
         System.out.print("Max:"); 
         System.out.println(st.max());
 
-        //testar floor para casos que não existem
+        //Floor
         System.out.print("Floor:"); 
         System.out.println(st.floor("g")); 
 
-        //testar floor para casos que não existem
+        //Ceiling
         System.out.print("Ceiling:"); 
         System.out.println(st.ceiling("q"));
 
-
+        //rank
         System.out.print("Rank:"); 
+        System.out.println(st.ceiling("q"));
+
+        //select
+        System.out.print("select:"); 
+        System.out.println(st.select(4));
+
+        //delete min
+        System.out.print("antes:"); 
+        System.out.println(st.toString()); 
+        st.deleteMin();  
+        System.out.print("depois:"); 
+        System.out.println(st.toString()); 
+
+        //delete max
+        System.out.print("antes:"); 
+        System.out.println(st.toString()); 
+        st.deleteMax();  
+        System.out.print("depois:"); 
+        System.out.println(st.toString()); 
+
+        //size lo hi
         System.out.print("size:"); 
-        System.out.println(st.size());
+        System.out.println(st.size("c", "s"));
         
     }
 
