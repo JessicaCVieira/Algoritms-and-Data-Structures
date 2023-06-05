@@ -1,7 +1,7 @@
 package projeto;
 //esta semana min max put get
 
-import java.util.Iterator;
+import java.util.ItMttterator;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
